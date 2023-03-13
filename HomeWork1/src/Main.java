@@ -13,7 +13,7 @@ public class Main {
         SizeFormatter.printBytes(input);
     }
 
-    public static boolean checkBytes(Long bytes) {
+    private static boolean checkBytes(Long bytes) {
         if (bytes < 0) {
             System.out.println("Количество байт не может быть отрицательным.");
             return false;
