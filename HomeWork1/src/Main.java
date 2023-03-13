@@ -9,7 +9,7 @@ public class Main {
             input = console.nextLong();
         }
         while (!checkBytes(input));
-        System.out.print("Значение в человеческом виде: ");
+        System.out.print("Значение в человекочитаемом виде: ");
         SizeFormatter.printBytes(input);
     }
 
