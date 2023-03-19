@@ -4,8 +4,6 @@ import entities.EntryAttempt;
 import entities.EntryPoint;
 import entities.ExitPoint;
 
-import java.util.ArrayList;
-
 /**
  * {@link IParking} является интерфейсом, описывающим набор
  * возможностей, которые реализует парковка
@@ -15,17 +13,17 @@ public interface IParking {
     /**
      * Возвращает список въездов
      *
-     * @return ArrayList entryPoints
+     * @return array of entryPoints
      */
-    ArrayList<EntryPoint> getEntryPoints();
+    EntryPoint[] getEntryPoints();
 
 
     /**
      * Возвращает список въездов
      *
-     * @return ArrayList exitPoints
+     * @return array of exitPoints
      */
-    ArrayList<ExitPoint> getExitPoints();
+    ExitPoint[] getExitPoints();
 
 
     /**
@@ -47,9 +45,9 @@ public interface IParking {
     /**
      * Возвращает список неудачных попыток въезда
      *
-     * @return attemptList
+     * @return array of attempts
      */
-    ArrayList<EntryAttempt> getAttemptList();
+    EntryAttempt[] getAttempts();
 
 
     /**

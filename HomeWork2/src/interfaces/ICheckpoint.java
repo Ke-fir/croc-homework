@@ -2,8 +2,6 @@ package interfaces;
 
 import entities.Car;
 
-import java.util.ArrayList;
-
 /**
  * {@link ICheckpoint} является интерфейсом, реализующим возможности пропускного пункта
  */
@@ -25,7 +23,7 @@ public interface ICheckpoint {
     /**
      * Предоставляет доступ к полю attemptList
      *
-     * @return ArrayList pastCars
+     * @return array of pastCars
      */
-    ArrayList<Car> getPastCars();
+    Car[] getPastCars();
 }

@@ -3,8 +3,6 @@ package baseClasses;
 import entities.Car;
 import interfaces.ICheckpoint;
 
-import java.util.ArrayList;
-
 public class Checkpoint implements ICheckpoint {
 
     /**
@@ -20,7 +18,7 @@ public class Checkpoint implements ICheckpoint {
     /**
      * Список проехавших машин
      */
-    private ArrayList<Car> pastCars;
+    private Car[] pastCars;
 
     @Override
     public int getNumber() {
@@ -44,7 +42,7 @@ public class Checkpoint implements ICheckpoint {
     }
 
     @Override
-    public ArrayList<Car> getPastCars() {
+    public Car[] getPastCars() {
         return this.pastCars;
     }
 
@@ -60,7 +58,7 @@ public class Checkpoint implements ICheckpoint {
      * @param description -- описание пункта
      * @param pastCars -- список проехавших автомобилей
      */
-    protected Checkpoint(Integer number, String description, ArrayList<Car> pastCars) {
+    protected Checkpoint(Integer number, String description, Car[] pastCars) {
         setNumber(number);
         this.description = description;
         this.pastCars = pastCars;
