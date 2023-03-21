@@ -1,24 +1,27 @@
 package baseClasses;
 
 import entities.Car;
+import entities.Parking;
 import interfaces.ICheckpoint;
 
 public class Checkpoint implements ICheckpoint {
 
+    protected Parking parking;
+
     /**
      * Номер пропускного пункта
      */
-    private Integer number;
+    protected Integer number;
 
     /**
      * Описание пропускного пункта
      */
-    private String description;
+    protected String description;
 
     /**
      * Список проехавших машин
      */
-    private Car[] pastCars;
+    protected Car[] pastCars = new Car[10];
 
     @Override
     public int getNumber() {
@@ -27,6 +30,7 @@ public class Checkpoint implements ICheckpoint {
 
     /**
      * Устанавливает номер пропускного пункта с учётом проверки на отрицательное значение
+     *
      * @param number -- номер пункта
      */
     protected void setNumber(Integer number) {
@@ -38,12 +42,20 @@ public class Checkpoint implements ICheckpoint {
 
     @Override
     public String getDescription() {
+
         return this.description;
     }
 
     @Override
     public Car[] getPastCars() {
         return this.pastCars;
+    }
+
+
+
+    @Override
+    public Parking getParking() {
+        return this.parking;
     }
 
     /**
@@ -54,11 +66,13 @@ public class Checkpoint implements ICheckpoint {
 
     /**
      * Конструктор класса {@link Checkpoint}
-     * @param number -- номер пункта
+     *
+     * @param number      -- номер пункта
      * @param description -- описание пункта
-     * @param pastCars -- список проехавших автомобилей
+     * @param pastCars    -- список проехавших автомобилей
      */
-    protected Checkpoint(Integer number, String description, Car[] pastCars) {
+    protected Checkpoint(Parking parking, Integer number, String description, Car[] pastCars) {
+        this.parking = parking;
         setNumber(number);
         this.description = description;
         this.pastCars = pastCars;

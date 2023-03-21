@@ -1,6 +1,7 @@
 package interfaces;
 
 import entities.Car;
+import entities.Parking;
 
 /**
  * {@link ICheckpoint} является интерфейсом, реализующим возможности пропускного пункта
@@ -26,4 +27,11 @@ public interface ICheckpoint {
      * @return array of pastCars
      */
     Car[] getPastCars();
+
+    /**
+     * Предоставляет доступ к полю parking
+     * @return parking
+     */
+    Parking getParking();
+
 }

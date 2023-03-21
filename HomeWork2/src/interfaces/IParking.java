@@ -1,8 +1,8 @@
 package interfaces;
 
-import entities.EntryAttempt;
-import entities.EntryPoint;
-import entities.ExitPoint;
+import entities.*;
+
+import java.util.Date;
 
 /**
  * {@link IParking} является интерфейсом, описывающим набор
@@ -47,7 +47,7 @@ public interface IParking {
      *
      * @return array of attempts
      */
-    EntryAttempt[] getAttempts();
+    FailedEntryAttempt[] getFailedAttempts();
 
 
     /**
@@ -57,4 +57,16 @@ public interface IParking {
      */
     boolean checkEntryPossibility();
 
+
+    /**
+     * Возвращает количество занятых мест
+     *
+     * @return occupiedSpaceCount
+     */
+    Integer getOccupiedSpaceCount();
+
+    /**
+     *
+     */
+    void addFailedAttempt(Car car, Date time);
 }
