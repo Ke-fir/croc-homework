@@ -1,6 +1,7 @@
 package baseClasses;
 
 import entities.Car;
+import entities.EntryPoint;
 import entities.Parking;
 import interfaces.ICheckpoint;
 
@@ -64,6 +65,7 @@ public class Checkpoint implements ICheckpoint {
         return this.parking;
     }
 
+
     /**
      * Пустой конструктор класса {@link Checkpoint}
      */
@@ -82,5 +84,26 @@ public class Checkpoint implements ICheckpoint {
         setNumber(number);
         this.description = description;
         this.pastCars = pastCars;
+    }
+
+    /**
+     * Конструктор класса {@link Checkpoint}
+     *
+     * @param parking     -- парковка, на которой находится пропускной пункт
+     * @param number      -- номер пункта
+     * @param description -- описание
+     */
+    protected Checkpoint(Parking parking, Integer number, String description) {
+        new Checkpoint(parking, number, description, null);
+    }
+
+    /**
+     * Конструктор класса {@link EntryPoint}
+     *
+     * @param parking -- парковка, на которой находится пропускной пункт
+     * @param number  -- номер пункта
+     */
+    public Checkpoint(Parking parking, Integer number) {
+        new Checkpoint(parking, number, null, null);
     }
 }

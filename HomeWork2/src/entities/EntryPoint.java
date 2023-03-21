@@ -9,38 +9,8 @@ import java.util.Date;
  * Въезд. Наследует {@link Checkpoint}
  */
 public class EntryPoint extends Checkpoint {
-    /**
-     * Конструктор класса {@link EntryPoint}
-     *
-     * @param parking     -- парковка, на которой находится пропускной пункт
-     * @param number      -- номер пункта
-     * @param description -- описание
-     * @param pastCars    -- список проехавших машин
-     */
-    public EntryPoint(Parking parking, Integer number, String description, Car[] pastCars) {
-        super(parking, number, description, pastCars);
-    }
 
-    /**
-     * Конструктор класса {@link EntryPoint}
-     *
-     * @param parking     -- парковка, на которой находится пропускной пункт
-     * @param number      -- номер пункта
-     * @param description -- описание
-     */
-    public EntryPoint(Parking parking, Integer number, String description) {
-        super(parking, number, description, null);
-    }
 
-    /**
-     * Конструктор класса {@link EntryPoint}
-     *
-     * @param parking -- парковка, на которой находится пропускной пункт
-     * @param number  -- номер пункта
-     */
-    public EntryPoint(Parking parking, Integer number) {
-        super(parking, number, null, null);
-    }
 
 
     /**
