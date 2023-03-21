@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment=".HomeWork2: add class Parking">
+      <change beforePath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/EntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/ExitPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/ExitPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Parking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Parking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ICheckpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ICheckpoint.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="package-info" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NBGg9FrW28zhogoGc1rWa4UdYd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ker_4/OneDrive/Рабочий стол/CROC/HomeWork2&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Program.Main" />
+      <module name="HomeWork2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment="" />
+      <created>1679130173267</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679130173267</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add interfaces for parking &amp; checkpoint">
+      <created>1679244456568</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679244456568</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add base class Checkpoint for EntryPoint &amp; ExitPoint">
+      <created>1679245047579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679245047579</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add info in docs">
+      <created>1679245165904</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679245165904</updated>
+    </task>
+    <task id="LOCAL-00004" summary=".HomeWork2: add interfaces for Parking &amp; Checkpoint">
+      <created>1679245952494</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679245952494</updated>
+    </task>
+    <task id="LOCAL-00005" summary="changed .gitignore for one from gitignore.io">
+      <created>1679246163580</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679246163580</updated>
+    </task>
+    <task id="LOCAL-00006" summary="changed .gitignore for one from gitignore.io">
+      <created>1679246285383</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679246285383</updated>
+    </task>
+    <task id="LOCAL-00007" summary=".HomeWork2: add base class Checkpoint for EntryPoint &amp; ExitPoint">
+      <created>1679246354186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679246354186</updated>
+    </task>
+    <task id="LOCAL-00008" summary=".HomeWork2: add .gitignore">
+      <created>1679246505654</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679246505654</updated>
+    </task>
+    <task id="LOCAL-00009" summary=".HomeWork2: changed ArrayList to arrays :(">
+      <created>1679248532058</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679248532058</updated>
+    </task>
+    <task id="LOCAL-00010" summary=".HomeWork2: changed some logic in Checkpoint, ICheckpoint and IParking">
+      <created>1679428101623</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679428101623</updated>
+    </task>
+    <task id="LOCAL-00011" summary=".HomeWork2: changed some logic in Checkpoint &amp; IParking">
+      <created>1679429192664</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679429192664</updated>
+    </task>
+    <task id="LOCAL-00012" summary=".HomeWork2: add class EntryPoint">
+      <created>1679429224564</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679429224564</updated>
+    </task>
+    <task id="LOCAL-00013" summary=".HomeWork2: transferred class constructors from EntryPoint to bas class Checkpoint">
+      <created>1679429588113</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679429588114</updated>
+    </task>
+    <task id="LOCAL-00014" summary=".HomeWork2: get constructors back in EntryPoint">
+      <created>1679430401448</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1679430401448</updated>
+    </task>
+    <task id="LOCAL-00015" summary=".HomeWork2: add class ExitPoint">
+      <created>1679430454586</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679430454586</updated>
+    </task>
+    <task id="LOCAL-00016" summary=".HomeWork2: add class FailedEntryAttempt">
+      <created>1679430591381</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679430591381</updated>
+    </task>
+    <task id="LOCAL-00017" summary=".HomeWork2: add class Car">
+      <created>1679431271109</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679431271109</updated>
+    </task>
+    <task id="LOCAL-00018" summary=".HomeWork2: add class Parking">
+      <created>1679432986745</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1679432986745</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add interfaces for parking &amp; checkpoint" />
+    <MESSAGE value="add base class Checkpoint for EntryPoint &amp; ExitPoint" />
+    <MESSAGE value="add info in docs" />
+    <MESSAGE value=".HomeWork2: add interfaces for Parking &amp; Checkpoint" />
+    <MESSAGE value="changed .gitignore for one from gitignore.io" />
+    <MESSAGE value=".HomeWork2: add base class Checkpoint for EntryPoint &amp; ExitPoint" />
+    <MESSAGE value=".HomeWork2: add .gitignore" />
+    <MESSAGE value=".HomeWork2: changed ArrayList to arrays :(" />
+    <MESSAGE value=".HomeWork2: changed some logic in Checkpoint, ICheckpoint and IParking" />
+    <MESSAGE value=".HomeWork2: changed some logic in Checkpoint &amp; IParking" />
+    <MESSAGE value=".HomeWork2: add class EntryPoint" />
+    <MESSAGE value=".HomeWork2: transferred class constructors from EntryPoint to bas class Checkpoint" />
+    <MESSAGE value=".HomeWork2: get constructors back in EntryPoint" />
+    <MESSAGE value=".HomeWork2: add class ExitPoint" />
+    <MESSAGE value=".HomeWork2: add class FailedEntryAttempt" />
+    <MESSAGE value=".HomeWork2: add class Car" />
+    <MESSAGE value=".HomeWork2: add class Parking" />
+    <option name="LAST_COMMIT_MESSAGE" value=".HomeWork2: add class Parking" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
+          <line>159</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
+          <line>138</line>
+          <properties class="entities.Parking" method="getLeftCars">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
+          <line>158</line>
+          <properties class="entities.Parking" method="passCarOut">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="exitPoint" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
