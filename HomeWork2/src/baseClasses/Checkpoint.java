@@ -6,6 +6,9 @@ import interfaces.ICheckpoint;
 
 public class Checkpoint implements ICheckpoint {
 
+    /**
+     * Парковка, на которой находится КПП
+     */
     protected Parking parking;
 
     /**
@@ -23,10 +26,12 @@ public class Checkpoint implements ICheckpoint {
      */
     protected Car[] pastCars = new Car[10];
 
+
     @Override
     public int getNumber() {
         return this.number;
     }
+
 
     /**
      * Устанавливает номер пропускного пункта с учётом проверки на отрицательное значение
@@ -34,11 +39,12 @@ public class Checkpoint implements ICheckpoint {
      * @param number -- номер пункта
      */
     protected void setNumber(Integer number) {
-        if (number >= 0)
-            this.number = number;
-        else
+        if (number < 0)
             System.err.println("Номер пропускного пункта не может быть отрицательным.");
+        else
+            this.number = number;
     }
+
 
     @Override
     public String getDescription() {
@@ -46,11 +52,11 @@ public class Checkpoint implements ICheckpoint {
         return this.description;
     }
 
+
     @Override
     public Car[] getPastCars() {
         return this.pastCars;
     }
-
 
 
     @Override

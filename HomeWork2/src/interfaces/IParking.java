@@ -66,7 +66,9 @@ public interface IParking {
     Integer getOccupiedSpaceCount();
 
     /**
-     *
+     * Добавляеет запись в список неудачных попыток въезда.
+     * @param car
+     * @param date
      */
-    void addFailedAttempt(Car car, Date time);
+    void addFailedAttempt(Car car, Date date);
 }
