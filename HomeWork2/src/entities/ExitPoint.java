@@ -10,9 +10,9 @@ public class ExitPoint extends Checkpoint {
     /**
      * Конструктор класса {@link ExitPoint}
      *
-     * @param number      -- номер пункта
-     * @param description -- описание
-     * @param pastCars    -- список проехавших машин
+     * @param number      номер пункта
+     * @param description описание
+     * @param pastCars    список проехавших машин
      */
     public ExitPoint(Integer number, String description, Car[] pastCars) {
         super(number, description, pastCars);
@@ -21,8 +21,8 @@ public class ExitPoint extends Checkpoint {
     /**
      * Конструктор класса {@link ExitPoint}
      *
-     * @param number      -- номер пункта
-     * @param description -- описание
+     * @param number      номер пункта
+     * @param description описание
      */
     public ExitPoint(Integer number, String description) {
         super(number, description, new Car[10]);
@@ -31,7 +31,7 @@ public class ExitPoint extends Checkpoint {
     /**
      * Конструктор класса {@link ExitPoint}
      *
-     * @param number  -- номер пункта
+     * @param number номер пункта
      */
     public ExitPoint(Integer number) {
         super(number, "", new Car[10]);

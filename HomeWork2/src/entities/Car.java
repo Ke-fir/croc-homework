@@ -18,7 +18,7 @@ public class Car {
     }
 
     /**
-     *
+     * Перегрузка метода toString
      * @return номер автомобиля
      */
     @Override

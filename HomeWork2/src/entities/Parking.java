@@ -54,28 +54,28 @@ public class Parking implements IParking {
     public void addFailedAttempt(Car car, LocalTime now) {
         var attempt = new FailedEntryAttempt(car, now); // создание новой неудачной попытки
 
-        if (Arrays.stream(attempts).anyMatch(x -> x != null && x.getCarNumber() == attempt.getCarNumber() && x.getAttemptTime() == attempt.getAttemptTime())) {
+        if (Arrays.stream(attempts).anyMatch(x -> x != null && x.getCarNumber().equals(attempt.getCarNumber()) && x.getAttemptTime() == attempt.getAttemptTime())) {
             System.err.println("Неудачные попытки въезда не должны дублироваться.");
             return;
         }
         // нахождение индекса реального последнего объекта в массиве c избыточным кол-вом ячеек
-        int lastAttemptIndex = 0;
-        for (int i = 0; i < attempts.length - 1; i++)
+        int lastAttemptIndex = -1;
+        for (int i = 0; i < attempts.length; i++)
             if (attempts[i] == null) {
                 lastAttemptIndex = i;
                 break;
             }
         // проверка, что новый элемент не поместится в существующий массив
-        if (lastAttemptIndex + 1 >= attempts.length - 1) {
+        if (lastAttemptIndex == -1) {
+            lastAttemptIndex = attempts.length;
             var tempArray = new FailedEntryAttempt[attempts.length + (attempts.length >> 1)]; // увеличение массива в 1,5 раза (>>1 == /2)
-            System.arraycopy(attempts, 0, tempArray, 0, attempts.length); //???
+            System.arraycopy(attempts, 0, tempArray, 0, attempts.length);
             attempts = tempArray;
         }
         // добавление нового элемента
-        else {
             attempts[lastAttemptIndex] = attempt; //записывание нового элемента в массив
             setOccupiedSpaceCount(occupiedSpaceCount + 1); //инкрементирование числа занятых мест парковки
-        }
+
     }
 
     @Override
@@ -159,23 +159,22 @@ public class Parking implements IParking {
      */
     public void passCarOut(Car car, ExitPoint exit) {
         // нахождение индекса реального последнего объекта в массиве c избыточным кол-вом ячеек
-        int lastCarIndex = 0;
-        for (int i = 0; exit.getPastCars() != null && i <  exit.getPastCars().length - 1; i++)
+        int lastCarIndex = -1;
+        for (int i = 0; exit.getPastCars() != null && i < exit.getPastCars().length; i++)
             if (exit.getPastCars()[i] == null) {
                 lastCarIndex = i;
                 break;
             }
         // проверка, что новый элемент не поместится в существующий массив
-        if (lastCarIndex + 1 >= exit.getPastCars().length - 1) {
+        if (lastCarIndex == -1) {
+            lastCarIndex = exit.getPastCars().length;
             var tempArray = new Car[exit.getPastCars().length + (exit.getPastCars().length >> 1)]; // увеличение массива в 1,5 раза (>>1 == /2)
             System.arraycopy(exit.getPastCars(), 0, tempArray, 0, exit.getPastCars().length); //???
             exit.setPastCars(tempArray);
         }
         // добавление нового элемента
-        else {
             exit.getPastCars()[lastCarIndex] = car; //записывание нового элемента в массив
             setOccupiedSpaceCount(occupiedSpaceCount - 1); //декрементирование числа занятых мест парковки
-        }
     }
 
 
@@ -202,28 +201,33 @@ public class Parking implements IParking {
      */
     protected void passCarIn(Car car, EntryPoint checkIn) {
         // нахождение индекса реального последнего объекта в массиве c избыточным кол-вом ячеек
-        int lastCarIndex = 0;
-        for (int i = 0; checkIn.getPastCars() != null && i < checkIn.getPastCars().length - 1; i++)
+        int lastCarIndex = -1;
+        for (int i = 0; checkIn.getPastCars() != null && i < checkIn.getPastCars().length; i++)
             if (checkIn.getPastCars()[i] == null) {
                 lastCarIndex = i;
                 break;
             }
         // проверка, что новый элемент не поместится в существующий массив
-        if (lastCarIndex + 1 >= checkIn.getPastCars().length - 1) {
-            var tempArray = new Car[checkIn.getPastCars().length + (checkIn.getPastCars().length >> 1)]; // увеличение массива в 1,5 раза (>>1 == /2)
-            System.arraycopy(checkIn.getPastCars(), 0, tempArray, 0, checkIn.getPastCars().length); //???
+        if (lastCarIndex ==  -1) {
+            lastCarIndex = checkIn.getPastCars().length;
+            var tempArray = new Car[checkIn.getPastCars().length + (checkIn.getPastCars().length >> 1)]; // увеличение массива в 1,5 раза (>> 1 == / 2)
+            System.arraycopy(checkIn.getPastCars(), 0, tempArray, 0, checkIn.getPastCars().length);
             checkIn.setPastCars(tempArray);
         }
         // добавление нового элемента
-        else {
             checkIn.getPastCars()[lastCarIndex] = car; //записывание нового элемента в массив
             occupiedSpaceCount++; //инкрементирование числа занятых мест парковки
-        }
     }
 
     public Parking() {
     }
 
+    /**
+     * Конструктор класса Parking
+     * @param spaceCount  количество метс на парковке
+     * @param entryPoints список заездов
+     * @param exitPoints  список выездов
+     */
     public Parking(int spaceCount, EntryPoint[] entryPoints, ExitPoint[] exitPoints) {
         this.spaceCount = spaceCount;
         this.exitPoints = exitPoints;

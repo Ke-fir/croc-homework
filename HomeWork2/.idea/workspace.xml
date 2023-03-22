@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt">
+    <list default="true" id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment=".HomeWork2: changed some documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Car.java" afterDir="false" />
@@ -12,8 +12,6 @@
       <change beforePath="$PROJECT_DIR$/src/entities/ExitPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/ExitPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/FailedEntryAttempt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/FailedEntryAttempt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Parking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Parking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/IParking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/IParking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/program/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679440919801</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt">
+      <created>1679476544415</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1679476544415</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,36 +251,10 @@
     <MESSAGE value=".HomeWork2: ended second homework" />
     <MESSAGE value=".HomeWork2: renamed package program" />
     <MESSAGE value=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt" />
-    <option name="LAST_COMMIT_MESSAGE" value=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt" />
+    <MESSAGE value=".HomeWork2: changed some documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value=".HomeWork2: changed some documentation" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>160</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>139</line>
-          <properties class="entities.Parking" method="getLeftCars">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>159</line>
-          <properties class="entities.Parking" method="passCarOut">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="exitPoint" />

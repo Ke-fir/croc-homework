@@ -45,6 +45,7 @@ public class FailedEntryAttempt {
     }
 
     /**
+     * Перегрузка метода toString
      * @return правильное строковое представление неудачной попытки
      */
     @Override

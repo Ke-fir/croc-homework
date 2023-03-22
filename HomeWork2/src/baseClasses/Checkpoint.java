@@ -22,7 +22,7 @@ public class Checkpoint implements ICheckpoint {
     protected Car[] pastCars = new Car[10];
 
     /**
-     *
+     * Перегрузка метода toString
      * @return строковое представление КПП в виде номера и описания
      */
     @Override
