@@ -34,7 +34,7 @@ public class ExitPoint extends Checkpoint {
      * @param number  -- номер пункта
      */
     public ExitPoint(Integer number) {
-        super(number, null, new Car[10]);
+        super(number, "", new Car[10]);
     }
 
 }

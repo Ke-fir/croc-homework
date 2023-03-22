@@ -2,8 +2,9 @@ package entities;
 
 import interfaces.IParking;
 
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Parking implements IParking {
     /**
@@ -50,8 +51,8 @@ public class Parking implements IParking {
     }
 
     @Override
-    public void addFailedAttempt(Car car, Date date) {
-        var attempt = new FailedEntryAttempt(car, date); // создание новой неудачной попытки
+    public void addFailedAttempt(Car car, LocalTime now) {
+        var attempt = new FailedEntryAttempt(car, now); // создание новой неудачной попытки
 
         if (Arrays.stream(attempts).anyMatch(x -> x != null && x.getCarNumber() == attempt.getCarNumber() && x.getAttemptTime() == attempt.getAttemptTime())) {
             System.err.println("Неудачные попытки въезда не должны дублироваться.");
@@ -190,7 +191,7 @@ public class Parking implements IParking {
             else
                 System.err.println("Такого КПП не существует");
         } else
-            addFailedAttempt(newCar, new Date()); // добавление неудачной попытки
+            addFailedAttempt(newCar, LocalTime.now(ZoneId.of("Europe/Moscow"))); // добавление неудачной попытки
     }
 
 

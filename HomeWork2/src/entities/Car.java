@@ -17,6 +17,14 @@ public class Car {
         return this.number;
     }
 
+    /**
+     *
+     * @return номер автомобиля
+     */
+    @Override
+    public String toString() {
+        return this.number;
+    }
 
     /**
      * Метод, задающий автомобильный номер по шаблону

@@ -2,7 +2,7 @@ package interfaces;
 
 import entities.*;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 /**
  * {@link IParking} является интерфейсом, описывающим набор
@@ -68,7 +68,7 @@ public interface IParking {
     /**
      * Добавляеет запись в список неудачных попыток въезда.
      * @param car
-     * @param date
+     * @param time время, когда произошла попытка въезда
      */
-    void addFailedAttempt(Car car, Date date);
+    void addFailedAttempt(Car car, LocalTime time);
 }

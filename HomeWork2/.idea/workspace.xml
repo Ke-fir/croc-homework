@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment=".HomeWork2: add class Parking">
+    <list default="true" id="35faf955-f5d3-487f-8c23-e57e2ea68c3a" name="Changes" comment=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseClasses/Checkpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Car.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/EntryPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/ExitPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/ExitPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/FailedEntryAttempt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/FailedEntryAttempt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Parking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Parking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/ICheckpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ICheckpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/IParking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/IParking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/program/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +50,7 @@
 }</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Program.Main" />
+      <option name="MAIN_CLASS_NAME" value="program.Main" />
       <module name="HomeWork2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -193,7 +197,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679432986745</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=".HomeWork2: ended second homework">
+      <created>1679440810577</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440810577</updated>
+    </task>
+    <task id="LOCAL-00020" summary=".HomeWork2: renamed package program">
+      <created>1679440919801</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440919801</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,19 +243,22 @@
     <MESSAGE value=".HomeWork2: add class FailedEntryAttempt" />
     <MESSAGE value=".HomeWork2: add class Car" />
     <MESSAGE value=".HomeWork2: add class Parking" />
-    <option name="LAST_COMMIT_MESSAGE" value=".HomeWork2: add class Parking" />
+    <MESSAGE value=".HomeWork2: ended second homework" />
+    <MESSAGE value=".HomeWork2: renamed package program" />
+    <MESSAGE value=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt" />
+    <option name="LAST_COMMIT_MESSAGE" value=".HomeWork2: changed Date type for LocalTime and override .toString() method for Checkpoints, Car, FailedEntryAttempt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>159</line>
+          <line>160</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>138</line>
+          <line>139</line>
           <properties class="entities.Parking" method="getLeftCars">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -246,7 +267,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/entities/Parking.java</url>
-          <line>158</line>
+          <line>159</line>
           <properties class="entities.Parking" method="passCarOut">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

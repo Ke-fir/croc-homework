@@ -1,6 +1,7 @@
 package entities;
 
-import java.util.Date;
+
+import java.time.LocalTime;
 
 /**
  * {@link FailedEntryAttempt} - класс, отображающий сущность неудачной попытки въезда авто
@@ -15,7 +16,7 @@ public class FailedEntryAttempt {
     /**
      * Поле, содержащее информацию о времени, в которое была совершена попытка въезда
      */
-    private Date attemptTime;
+    private LocalTime attemptTime;
 
     /**
      * Создание сущности неудачной попытки въезда с пустыми полями
@@ -29,7 +30,7 @@ public class FailedEntryAttempt {
      * @param car
      * @param attemptTime
      */
-    public FailedEntryAttempt(Car car, Date attemptTime) {
+    public FailedEntryAttempt(Car car, LocalTime attemptTime) {
         this.car = car;
         this.attemptTime = attemptTime;
     }
@@ -44,11 +45,19 @@ public class FailedEntryAttempt {
     }
 
     /**
+     * @return правильное строковое представление неудачной попытки
+     */
+    @Override
+    public String toString() {
+        return "(" + car.getNumber() + "; " + attemptTime.toString()+ ")";
+    }
+
+    /**
      * Возвращает время, когда была совершена попытка
      *
      * @return Date attemptTime
      */
-    public Date getAttemptTime() {
+    public LocalTime getAttemptTime() {
         return this.attemptTime;
     }
 }

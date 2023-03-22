@@ -14,13 +14,21 @@ public class Checkpoint implements ICheckpoint {
     /**
      * Описание пропускного пункта
      */
-    protected String description;
+    protected String description = "";
 
     /**
      * Список проехавших машин
      */
     protected Car[] pastCars = new Car[10];
 
+    /**
+     *
+     * @return строковое представление КПП в виде номера и описания
+     */
+    @Override
+    public String toString() {
+        return this.number +  this.description;
+    }
 
     @Override
     public int getNumber() {
@@ -48,7 +56,7 @@ public class Checkpoint implements ICheckpoint {
     }
 
 
-    public void setPastCars(Car[] cars){
+    public void setPastCars(Car[] cars) {
         this.pastCars = cars;
     }
 
