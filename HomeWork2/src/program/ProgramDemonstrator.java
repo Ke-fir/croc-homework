@@ -4,6 +4,9 @@ import entities.*;
 
 import java.util.Arrays;
 
+/**
+* Класс для демонстрации возможностей парковки
+*/
 public class ProgramDemonstrator {
     public static void main(String[] args) {
 
