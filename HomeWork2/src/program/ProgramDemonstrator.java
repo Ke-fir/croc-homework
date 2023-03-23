@@ -4,7 +4,7 @@ import entities.*;
 
 import java.util.Arrays;
 
-public class Main {
+public class ProgramDemonstrator {
     public static void main(String[] args) {
 
         // пример неправильного формата номера (4 цифры вместо 3х) и соответствующей ошибки
