@@ -65,6 +65,16 @@ public abstract class Transport {
     }
 
     /**
+     * Compares 2 objects of transport with their unique ID
+     * @param obj object of transport
+     * @return true if equals
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return this.id == ((Transport)obj).id;
+    }
+
+    /**
      * Transport constructor.
      *
      * @param id unique positive integer
