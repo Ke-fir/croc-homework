@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework3.transport.aircraft;
+package ru.croc.javaschool.homework3.transport.air;
 
 /**
  * Helicopter.
