@@ -5,18 +5,19 @@ import ru.croc.javaschool.homework3.transport.Transport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Class of rental system
  */
-public class Rent {
+public class Rent { // TODO: 01.04.2023 make constructor and so on 
     /**
      * Structure that has days and list of vehicles that have reservations on this day.
      */
     private HashMap<Calendar, ArrayList<Transport>> rentalCalendar;
 
     /**
-     * List of all companies' transport units.
+     * List of all company's transport units.
      */
     private ArrayList<Transport> transportUnits;
 
@@ -32,7 +33,11 @@ public class Rent {
      */
     public void addBooking(Calendar day, Transport transport) {
         if (rentalCalendar.containsKey(day)) {
-            rentalCalendar.get(day).add(transport);
+            if (this.checkRentPossibility(day, transport)) {
+                rentalCalendar.get(day).add(transport);
+            } else {
+                System.err.println("This transport is already booked at that day");
+            }
         } else {
             var tempList = new ArrayList<Transport>();
             tempList.add(transport);
@@ -47,11 +52,14 @@ public class Rent {
      * @param transports list of some transport units
      */
     public void addBooking(Calendar day, ArrayList<Transport> transports) {
-        if (rentalCalendar.containsKey(day)) {
-            for (Transport transport : transports)
-                rentalCalendar.get(day).add(transport);
-        } else {
-            rentalCalendar.put(day, transports);
+        for (Transport transport : transports) {
+            addBooking(day, transport);
+        }
+    }
+
+    public void addBooking(ArrayList<Calendar> days, Transport transport) {
+        for (var day : days) {
+            addBooking(day, transport);
         }
     }
 
@@ -60,7 +68,8 @@ public class Rent {
     }
 
     /**
-     * Register new transport in companies' base.
+     * Register new transport in company's base.
+     *
      * @param transport some transport
      */
     public void addTransport(Transport transport) {
@@ -72,14 +81,74 @@ public class Rent {
     }
 
     /**
-     * Deducts transport from companies' base.
+     * Deducts transport from company's base.
+     *
      * @param transport some transport.
      */
-    public void removeTransport(Transport transport){
+    public void removeTransport(Transport transport) {
         if (!transportUnits.contains(transport)) {
             transportUnits.remove(transport);
         } else {
             System.err.println("Transport list doesn't contain this transport");
         }
+    }
+
+    /**
+     * Checks possibility of rent of the transport in selected date.
+     *
+     * @param transport some transport.
+     * @param day       some day.
+     * @return true if transport is free at selected day.
+     */
+    public boolean checkRentPossibility(Calendar day, Transport transport) {
+        return !rentalCalendar.get(day).contains(transport);
+    }
+
+    /**
+     * Checks possibility of rent of the transport in list of dates
+     * (from explanation of the task in telegram).
+     *
+     * @param transport some transport.
+     * @param days      list of dates.
+     * @return true if transport is free on all selected days.
+     */
+    public boolean checkRentPossibility(List<Calendar> days, Transport transport) {
+        boolean tempFlag = true;
+        for (var day : days) {
+            tempFlag &= checkRentPossibility(day, transport);
+        }
+        return tempFlag;
+    }
+
+    /**
+     * Finds free transport at selected date.
+     * @param day some date.
+     * @param transportType plug to take type.
+     * @return list of free transport.
+     */
+    public ArrayList<Transport> findFreeTransportUnits(Calendar day, Transport transportType) {
+        var freeTransportUnits = new ArrayList<Transport>();
+        /* Completion list with transport of the right type*/
+        for (var transport: transportUnits){
+            if (transport.getClass() == transportType.getClass()){
+                freeTransportUnits.add(transportType);
+            }
+        }
+        if (rentalCalendar.containsKey(day)) {
+            for (var transport : rentalCalendar.get(day)) {
+                if (transport.getClass() == transportType.getClass()){ // if busy transport type is o.k.
+                    freeTransportUnits.remove(transport);              // remove this transport from free list
+                }
+            }
+        }
+        return freeTransportUnits;
+    }
+
+    public HashMap<Calendar, ArrayList<Transport>> findFreeTransportUnits(ArrayList<Calendar> days, Transport transportType){
+        var freeTransportCalendar = new HashMap<Calendar, ArrayList<Transport>>();
+        for (var day: days){
+            freeTransportCalendar.put(day, findFreeTransportUnits(day, transportType));
+        }
+        return freeTransportCalendar;
     }
 }
