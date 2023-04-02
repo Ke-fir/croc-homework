@@ -10,20 +10,22 @@ import java.util.List;
 /**
  * Class of rental system
  */
-public class Rent { // TODO: 01.04.2023 make constructor and so on 
+public class Rent {
     /**
      * Structure that has days and list of vehicles that have reservations on this day.
      */
-    private HashMap<Calendar, ArrayList<Transport>> rentalCalendar;
+    private HashMap<Calendar, ArrayList<Transport>> rentalCalendar = new HashMap<>();
 
     /**
      * List of all company's transport units.
      */
-    private ArrayList<Transport> transportUnits;
+    private ArrayList<Transport> transportUnits = new ArrayList<>();
 
     public HashMap<Calendar, ArrayList<Transport>> getRentalCalendar() {
         return rentalCalendar;
     }
+
+
 
     /**
      * Adds record about transport reservation on some day to rental calendar.
@@ -68,7 +70,7 @@ public class Rent { // TODO: 01.04.2023 make constructor and so on
     }
 
     /**
-     * Register new transport in company's base.
+     * Register new transport unit in company's base.
      *
      * @param transport some transport
      */
@@ -77,6 +79,17 @@ public class Rent { // TODO: 01.04.2023 make constructor and so on
             transportUnits.add(transport);
         } else {
             System.err.println("Transport list already contains this transport");
+        }
+    }
+
+    /**
+     * Regs list of new transport units in company's base.
+     *
+     * @param transportUnits list of new transport units.
+     */
+    public void addTransport(ArrayList<Transport> transportUnits){
+        for (var transport: transportUnits){
+            addTransport(transport);
         }
     }
 
@@ -151,4 +164,15 @@ public class Rent { // TODO: 01.04.2023 make constructor and so on
         }
         return freeTransportCalendar;
     }
+
+    /**
+     * Rent constructor.
+     * @param transportUnits list of transport.
+     */
+    public Rent(ArrayList<Transport> transportUnits)
+    {
+        addTransport(transportUnits);
+    }
+
+    public Rent(){}
 }
