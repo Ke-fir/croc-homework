@@ -50,9 +50,11 @@ public class DemoPresentation {
         rentSystem.addTransport(trucks); // adding list of transports
         rentSystem.addTransport(airCrafts);
         rentSystem.addTransport(pmvs);
+        System.out.println("PRESENTATION OF ADDING NEW TRANSPORT:\n" + rentSystem.getTransportUnits().toString());
 
         /* PRESENTATION OF REMOVING TRANSPORT */
         rentSystem.removeTransport(someWheel); // removing transport
+        System.out.println("PRESENTATION OF REMOVING TRANSPORT:\n" + rentSystem.getTransportUnits().toString());
 
         /* PRESENTATION OF ADDING NEW BOOKING BY SELECTED DATE */
         rentSystem.addBooking(new GregorianCalendar(2023, 03, 03), trucks); // booking trucks on 03.04.2023
@@ -64,6 +66,7 @@ public class DemoPresentation {
 
         /* PRESENTATION OF CHECKING POSSIBILITY OF RENT ON SELECTED DATE */
         var zubiloCheckingResult = rentSystem.checkRentPossibility(new GregorianCalendar(2023, 03, 03), zubilo);
+        System.out.println("PRESENTATION OF CHECKING POSSIBILITY OF RENT ON SELECTED DATE:\n" + zubiloCheckingResult);
 
         /* PRESENTATION OF SEARCHING FREE TRANSPORT ON SELECTED DATES */
         var freeTransports = rentSystem.findFreeTransportUnits(dates, AircraftTyped.class);
