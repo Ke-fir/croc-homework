@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
  * Presentation class for rent system
  */
 public class DemoPresentation {
-    public static void main(String[] args) {// TODO: 01.04.2023 make presentation
+    public static void main(String[] args) {
         /* START OF INITIATING TRANSPORT */
         var zubilo = new PassengerCar(0, 2500, "VAZ", "2108", "С234РУ77", 1.2);
         var taxi = new PassengerCar(1, 5000, "Peugeot", "408", "О628АХ123", 3.8);
