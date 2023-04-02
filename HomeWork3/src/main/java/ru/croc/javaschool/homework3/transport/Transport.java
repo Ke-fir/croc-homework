@@ -76,6 +76,11 @@ public abstract class Transport implements TransportTyped {
         return this.id == ((Transport)obj).id;
     }
 
+    @Override
+    public String toString() {
+       return "(" + this.id + "; " + this.brand + " " + this.model + "; " + this.rentalPrice + " rub)";
+    }
+
     /**
      * Transport constructor.
      *
