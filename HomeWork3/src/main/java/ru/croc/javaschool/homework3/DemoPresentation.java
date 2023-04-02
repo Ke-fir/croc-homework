@@ -1,6 +1,7 @@
 package ru.croc.javaschool.homework3;
 
 import ru.croc.javaschool.homework3.transport.Transport;
+import ru.croc.javaschool.homework3.transport.air.Aircraft;
 import ru.croc.javaschool.homework3.transport.air.Helicopter;
 import ru.croc.javaschool.homework3.transport.air.Jet;
 import ru.croc.javaschool.homework3.transport.auto.PassengerCar;
@@ -10,12 +11,15 @@ import ru.croc.javaschool.homework3.transport.pmv.MonoWheel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Presentation class for rent system
  */
 public class DemoPresentation {
     public static void main(String[] args) {// TODO: 01.04.2023 make presentation
+        /* START OF INITIATING TRANSPORT */
         var zubilo = new PassengerCar(0, 2500, "VAZ", "2108", "С234РУ77", 1.2);
         var taxi = new PassengerCar(1, 5000, "Peugeot", "408", "О628АХ123", 3.8);
         var volvoTruck = new Truck(2, 9000, "Volvo", "Super truck", "В656ОС98", 10000,
@@ -35,7 +39,9 @@ public class DemoPresentation {
         var nineWheel = new MonoWheel(10, 400, "NineBot", "Wheel", 2.1, 60, 35);
         var someWheel = new MonoWheel(11, 300, "Brand", "Model", 1.8, 36, 18);
         var pmvs = new ArrayList<Transport>(Arrays.asList(nineScoot, yandexScoot, nineWheel, someWheel));
+        /* END OF INITIATING */
 
+        /* PRESENTATION OF ADDING NEW TRANSPORT*/
         var rentSystem = new Rent();
         rentSystem.addTransport(zubilo); // adding single transports
         rentSystem.addTransport(taxi);
@@ -43,5 +49,21 @@ public class DemoPresentation {
         rentSystem.addTransport(airCrafts);
         rentSystem.addTransport(pmvs);
 
+        /* PRESENTATION OF REMOVING TRANSPORT */
+        rentSystem.removeTransport(someWheel); // removing transport
+
+        /* PRESENTATION OF ADDING NEW BOOKING BY SELECTED DATE */
+        rentSystem.addBooking(new GregorianCalendar(2023, 03, 03), trucks); // booking trucks on 03.04.2023
+        rentSystem.addBooking(new GregorianCalendar(2023,03, 01), rentSystem.getTransportUnits()); // booking all transport on 01.04.2023
+        rentSystem.addBooking(new GregorianCalendar(2023,03,03), suhoi); // booking suhoi jet on my friend's birthday
+        var dates = new ArrayList<Calendar>(Arrays.asList(new GregorianCalendar(2023, 03, 03), new GregorianCalendar(2023, 03, 07),
+                new GregorianCalendar(2023, 03, 21)));
+        rentSystem.addBooking(dates, zubilo); // booking vaz 2108 for several days
+
+        /* PRESENTATION OF CHECKING POSSIBILITY OF RENT ON SELECTED DATE */
+        var zubiloCheckingResult = rentSystem.checkRentPossibility(new GregorianCalendar(2023, 03, 03), zubilo);
+
+        /* PRESENTATION OF SEARCHING FREE TRANSPORT ON SELECTED DATES */
+        var freeTransports = rentSystem.findFreeTransportUnits(dates, Aircraft.class);
     }
 }

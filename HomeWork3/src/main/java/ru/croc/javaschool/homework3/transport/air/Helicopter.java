@@ -23,7 +23,7 @@ public class Helicopter extends Aircraft {
     }
 
     /**
-     * Aircraft constructor.
+     * Helicopter constructor.
      *
      * @param id              unique positive integer
      * @param rentalPrice     price in rubbles

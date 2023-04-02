@@ -99,10 +99,10 @@ public class Rent {
      * @param transport some transport.
      */
     public void removeTransport(Transport transport) {
-        if (!transportUnits.contains(transport)) {
+        if (transportUnits.contains(transport)) {
             transportUnits.remove(transport);
         } else {
-            System.err.println("Transport list doesn't contain this transport");
+            System.err.println("Transport list doesn't contain transport with ID: " + transport.getId());
         }
     }
 
@@ -136,31 +136,33 @@ public class Rent {
     /**
      * Finds free transport at selected date.
      * @param day some date.
-     * @param transportType plug to take type.
+     * @param typeOfTransport plug to take type.
      * @return list of free transport.
      */
-    public ArrayList<Transport> findFreeTransportUnits(Calendar day, Transport transportType) {
+    public ArrayList<Transport> findFreeTransportUnits(Calendar day, Class<?> typeOfTransport) {
         var freeTransportUnits = new ArrayList<Transport>();
-        /* Completion list with transport of the right type*/
+        /* Firstly we fill all transport with selected type */
         for (var transport: transportUnits){
-            if (transport.getClass() == transportType.getClass()){
-                freeTransportUnits.add(transportType);
+            if (transport.getClass() == typeOfTransport){
+                freeTransportUnits.add(transport);
             }
         }
+        /* Then we remove all rented units */
         if (rentalCalendar.containsKey(day)) {
             for (var transport : rentalCalendar.get(day)) {
-                if (transport.getClass() == transportType.getClass()){ // if busy transport type is o.k.
-                    freeTransportUnits.remove(transport);              // remove this transport from free list
+                if (transport.getClass() == typeOfTransport){
+                    freeTransportUnits.remove(transport);
                 }
             }
         }
+        /* And return remaining transport */
         return freeTransportUnits;
     }
 
-    public HashMap<Calendar, ArrayList<Transport>> findFreeTransportUnits(ArrayList<Calendar> days, Transport transportType){
+    public HashMap<Calendar, ArrayList<Transport>> findFreeTransportUnits(ArrayList<Calendar> days, Class<?> typeOfTransport){
         var freeTransportCalendar = new HashMap<Calendar, ArrayList<Transport>>();
         for (var day: days){
-            freeTransportCalendar.put(day, findFreeTransportUnits(day, transportType));
+            freeTransportCalendar.put(day, findFreeTransportUnits(day, typeOfTransport));
         }
         return freeTransportCalendar;
     }
