@@ -1,9 +1,11 @@
 package ru.croc.javaschool.homework3.transport;
 
+import ru.croc.javaschool.homework3.interfaces.TransportTyped;
+
 /**
  * Base class for all transports.
  */
-public abstract class Transport {
+public abstract class Transport implements TransportTyped {
     /**
      * Transport ID
      * Should be unique positive integer.

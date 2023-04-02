@@ -1,7 +1,9 @@
 package ru.croc.javaschool.homework3;
 
+
+import ru.croc.javaschool.homework3.interfaces.AircraftTyped;
+import ru.croc.javaschool.homework3.report.Report;
 import ru.croc.javaschool.homework3.transport.Transport;
-import ru.croc.javaschool.homework3.transport.air.Aircraft;
 import ru.croc.javaschool.homework3.transport.air.Helicopter;
 import ru.croc.javaschool.homework3.transport.air.Jet;
 import ru.croc.javaschool.homework3.transport.auto.PassengerCar;
@@ -64,6 +66,10 @@ public class DemoPresentation {
         var zubiloCheckingResult = rentSystem.checkRentPossibility(new GregorianCalendar(2023, 03, 03), zubilo);
 
         /* PRESENTATION OF SEARCHING FREE TRANSPORT ON SELECTED DATES */
-        var freeTransports = rentSystem.findFreeTransportUnits(dates, Aircraft.class);
+        var freeTransports = rentSystem.findFreeTransportUnits(dates, AircraftTyped.class);
+
+        /* PRESENTATION OF REPORT */
+        var report = new Report(new GregorianCalendar(2023, 03,03), rentSystem);
+        report.print();
     }
 }

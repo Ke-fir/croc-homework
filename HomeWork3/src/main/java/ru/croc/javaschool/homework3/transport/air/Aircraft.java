@@ -1,11 +1,12 @@
 package ru.croc.javaschool.homework3.transport.air;
 
+import ru.croc.javaschool.homework3.interfaces.AircraftTyped;
 import ru.croc.javaschool.homework3.transport.Transport;
 
 /**
  * Abstract class of air transport that extends basic transport
  */
-public abstract class Aircraft extends Transport {
+public abstract class Aircraft extends Transport implements AircraftTyped {
     private int numberOfSeats;
     private int numberOfEngines;
 

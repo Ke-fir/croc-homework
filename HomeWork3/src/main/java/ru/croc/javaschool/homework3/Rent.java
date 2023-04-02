@@ -26,7 +26,6 @@ public class Rent {
     }
 
 
-
     /**
      * Adds record about transport reservation on some day to rental calendar.
      *
@@ -87,8 +86,8 @@ public class Rent {
      *
      * @param transportUnits list of new transport units.
      */
-    public void addTransport(ArrayList<Transport> transportUnits){
-        for (var transport: transportUnits){
+    public void addTransport(ArrayList<Transport> transportUnits) {
+        for (var transport : transportUnits) {
             addTransport(transport);
         }
     }
@@ -135,22 +134,23 @@ public class Rent {
 
     /**
      * Finds free transport at selected date.
-     * @param day some date.
+     *
+     * @param day             some date.
      * @param typeOfTransport plug to take type.
      * @return list of free transport.
      */
-    public ArrayList<Transport> findFreeTransportUnits(Calendar day, Class<?> typeOfTransport) {
-        var freeTransportUnits = new ArrayList<Transport>();
+    public <T extends Transport> ArrayList<T> findFreeTransportUnits(Calendar day, Class<?> typeOfTransport) {
+        var freeTransportUnits = new ArrayList<T>();
         /* Firstly we fill all transport with selected type */
-        for (var transport: transportUnits){
-            if (transport.getClass() == typeOfTransport){
-                freeTransportUnits.add(transport);
+        for (var transport : transportUnits) {
+            if (typeOfTransport.isAssignableFrom(transport.getClass())) {
+                freeTransportUnits.add((T) transport);
             }
         }
         /* Then we remove all rented units */
         if (rentalCalendar.containsKey(day)) {
             for (var transport : rentalCalendar.get(day)) {
-                if (transport.getClass() == typeOfTransport){
+                if (typeOfTransport.isAssignableFrom(transport.getClass())) {
                     freeTransportUnits.remove(transport);
                 }
             }
@@ -159,9 +159,9 @@ public class Rent {
         return freeTransportUnits;
     }
 
-    public HashMap<Calendar, ArrayList<Transport>> findFreeTransportUnits(ArrayList<Calendar> days, Class<?> typeOfTransport){
-        var freeTransportCalendar = new HashMap<Calendar, ArrayList<Transport>>();
-        for (var day: days){
+    public <T extends Transport> HashMap<Calendar, ArrayList<T>> findFreeTransportUnits(ArrayList<Calendar> days, Class<?> typeOfTransport) {
+        var freeTransportCalendar = new HashMap<Calendar, ArrayList<T>>();
+        for (var day : days) {
             freeTransportCalendar.put(day, findFreeTransportUnits(day, typeOfTransport));
         }
         return freeTransportCalendar;
@@ -169,12 +169,13 @@ public class Rent {
 
     /**
      * Rent constructor.
+     *
      * @param transportUnits list of transport.
      */
-    public Rent(ArrayList<Transport> transportUnits)
-    {
+    public Rent(ArrayList<Transport> transportUnits) {
         addTransport(transportUnits);
     }
 
-    public Rent(){}
+    public Rent() {
+    }
 }

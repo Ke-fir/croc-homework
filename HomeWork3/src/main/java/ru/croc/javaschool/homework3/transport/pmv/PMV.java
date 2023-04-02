@@ -1,11 +1,12 @@
 package ru.croc.javaschool.homework3.transport.pmv;
 
+import ru.croc.javaschool.homework3.interfaces.PmvTyped;
 import ru.croc.javaschool.homework3.transport.Transport;
 
 /**
  * Personal Mobility Vehicle base class.
  */
-public abstract class PMV extends Transport {
+public abstract class PMV extends Transport implements PmvTyped {
     /**
      * Motor power in kilowatts.
      */

@@ -1,11 +1,12 @@
 package ru.croc.javaschool.homework3.transport.auto;
 
+import ru.croc.javaschool.homework3.interfaces.AutomobileTyped;
 import ru.croc.javaschool.homework3.transport.Transport;
 
 /**
  * Abstract class that extends basically transport.
  */
-public abstract class Automobile extends Transport {
+public abstract class Automobile extends Transport implements AutomobileTyped {
     /**
      * Car number.
      */
