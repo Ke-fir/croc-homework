@@ -1,7 +1,7 @@
 package ru.croc.javaschool.homework3.interfaces;
 
 /**
- * Interface to guarantee that class is PMV.
+ * Interface for determination PMV.
  */
 public interface PmvTyped {
 }
