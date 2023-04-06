@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework4.exercise1;
+package ru.croc.javaschool.homework4.exercise1.helpers;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.homework4.exercise1.entities.Employee;
 import ru.croc.javaschool.homework4.exercise1.entities.Organization;
 import ru.croc.javaschool.homework4.exercise1.helpers.ManagerDeterminator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
