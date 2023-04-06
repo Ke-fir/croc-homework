@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework4.exercise1;
+package ru.croc.javaschool.homework4.exercise1.entities;
 
 /**
  * Employee.
@@ -41,6 +41,15 @@ public class Employee {
         }
         else
             System.err.println("Negative value as ID.");
+    }
+
+    /**
+     * Override of hashcode counting rule for right hash map work (to put in the order due to ID).
+     * @return hash code that is equal to ID
+     */
+    @Override
+    public int hashCode() {
+        return this.id;
     }
 
     /**

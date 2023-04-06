@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework4.exercise1;
+package ru.croc.javaschool.homework4.exercise1.entities;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Organization implements Comparable<Organization> {
     /**
      * Sets organization's manager with validation of employee.
      *
-     * @param manager
+     * @param manager the manager of organization
      */
     public void setManager(Employee manager) {
         if (manager.getManager() == null) {
@@ -48,6 +48,17 @@ public class Organization implements Comparable<Organization> {
     }
 
     /**
+     * Adds list of employees.
+     *
+     * @param employees list of employees.
+     */
+    public void addEmployees(ArrayList<Employee> employees) {
+        for (var employee : employees) {
+            addEmployee(employee);
+        }
+    }
+
+    /**
      * Compares 2 organization by their employees count.
      *
      * @param organization the object to be compared.
@@ -56,6 +67,20 @@ public class Organization implements Comparable<Organization> {
     @Override
     public int compareTo(Organization organization) {
         return Integer.compare(this.employees.size(), organization.employees.size());
+    }
+
+    /**
+     * Override of equality for organizations.
+     * @param obj some organization
+     * @return true if equals
+     */
+    /* Is override for equality tests */
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = true;
+        result &= this.manager.hashCode() == ((Organization) obj).manager.hashCode();
+        result &= this.employees.containsAll(((Organization) obj).employees);
+        return result;
     }
 
     /**
@@ -72,6 +97,6 @@ public class Organization implements Comparable<Organization> {
      */
     public Organization(Employee manager, ArrayList<Employee> employees) {
         setManager(manager);
-        this.employees.addAll(employees);
+        addEmployees(employees);
     }
 }
