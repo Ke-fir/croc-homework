@@ -35,9 +35,40 @@ public class TaskManager {
         tasks.remove(deletingTask);
     }
 
-    public void editTask(Task task){
-            tasks.stream()
-                    .filter(x -> x.getCode() == task.getCode())
-                    .map(x -> task);
+    /**
+     * Edits task in task list.
+     *
+     * @param editedTask updated task
+     */
+    public void editTask(Task editedTask) {
+        for (var task : tasks) {
+            if (task.getCode() == editedTask.getCode()) {
+                task.cloneOf(editedTask);
+                return;
+            }
+        }
+
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Constructor of task manager with list of tasks.
+     *
+     * @param tasks list of tasks
+     */
+    public TaskManager(ArrayList<Task> tasks) {
+        for (var task : tasks) {
+            addTask(task);
+        }
+
+    }
+
+    /**
+     * Empty constructor of task manager.
+     */
+    public TaskManager() {
     }
 }
