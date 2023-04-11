@@ -9,6 +9,9 @@
 .idea/
 *.iml
 
+# Target
+target/
+*.lst
 
 # AWS User-specific
 .idea/**/aws.xml
