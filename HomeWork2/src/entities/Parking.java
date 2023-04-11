@@ -54,7 +54,8 @@ public class Parking implements IParking {
     public void addFailedAttempt(Car car, LocalTime now) {
         var attempt = new FailedEntryAttempt(car, now); // создание новой неудачной попытки
 
-        if (Arrays.stream(attempts).anyMatch(x -> x != null && x.getCarNumber().equals(attempt.getCarNumber()) && x.getAttemptTime() == attempt.getAttemptTime())) {
+        if (Arrays.stream(attempts).anyMatch(x -> x != null && x.getCarNumber().equals(attempt.getCarNumber()) &&
+                x.getAttemptTime() == attempt.getAttemptTime())) {
             System.err.println("Неудачные попытки въезда не должны дублироваться.");
             return;
         }
