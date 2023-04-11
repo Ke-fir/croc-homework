@@ -3,7 +3,7 @@ package ru.croc.javaschool.homework5;
 /**
  * Work task.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     /**
      * Task code.
      */
@@ -55,5 +55,41 @@ public class Task {
         this.description = description;
         this.executor = executor;
         this.status = status;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (this.code > o.code){
+            return 1;
+        } else {
+            if (this.code < o.code){
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        var task = (Task)obj;
+        var equality = true;
+        equality &= this.code == task.code &&
+                this.name.equals(task.name) &&
+                this.description.equals(task.description) &&
+                this.executor.equals(task.executor) &&
+                this.status.equals(task.status);
+        return equality;
+    }
+
+    /**
+     * Makes this task a clone of another task.
+     * @param task task that should be cloned
+     */
+    public void cloneOf(Task task){
+        this.code = task.code;
+        this.name = task.name;
+        this.description = task.description;
+        this.executor = task.executor;
+        this.status = task.status;
     }
 }
