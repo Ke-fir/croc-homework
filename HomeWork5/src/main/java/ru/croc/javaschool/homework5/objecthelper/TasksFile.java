@@ -1,7 +1,7 @@
 package ru.croc.javaschool.homework5.objecthelper;
 
 
-import ru.croc.javaschool.homework5.Task;
+import ru.croc.javaschool.homework5.object.Task;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Class for writing tasks to file and reading data from it.
  */
 public class TasksFile {
-    private static String path = "Tasks.txt";
+    private final static String path = "Tasks.txt";
 
     /**
      * Writes tasks to file. Always rewrites file.

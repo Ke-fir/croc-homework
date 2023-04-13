@@ -1,9 +1,8 @@
 package ru.croc.javaschool.homework5.console;
 
-import ru.croc.javaschool.homework5.Graphics;
-import ru.croc.javaschool.homework5.Task;
-import ru.croc.javaschool.homework5.TaskManager;
-import ru.croc.javaschool.homework5.TasksFile;
+import ru.croc.javaschool.homework5.object.Task;
+import ru.croc.javaschool.homework5.objecthelper.TaskManager;
+import ru.croc.javaschool.homework5.objecthelper.TasksFile;
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ import java.util.Scanner;
  * Console api for OOO"Roga & Copyta"
  */
 public class ConsoleApi {
-    private ru.croc.javaschool.homework5.Graphics graphics;
+    private Graphics graphics;
     private TaskManager taskManager;
     private Scanner scanner;
 

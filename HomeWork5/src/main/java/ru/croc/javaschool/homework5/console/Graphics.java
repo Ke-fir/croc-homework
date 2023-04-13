@@ -1,6 +1,6 @@
 package ru.croc.javaschool.homework5.console;
 
-import ru.croc.javaschool.homework5.Task;
+import ru.croc.javaschool.homework5.object.Task;
 
 import java.util.ArrayList;
 
