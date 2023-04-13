@@ -36,7 +36,7 @@ public class TaskManager {
     }
 
     /**
-     * Edits task in task list.
+     * Edits task  in task list which has the same code with edited task fields.
      *
      * @param editedTask updated task
      */
@@ -63,7 +63,6 @@ public class TaskManager {
         for (var task : tasks) {
             addTask(task);
         }
-
     }
 
     /**
