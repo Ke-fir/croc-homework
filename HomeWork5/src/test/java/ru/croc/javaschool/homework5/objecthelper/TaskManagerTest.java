@@ -3,7 +3,8 @@ package ru.croc.javaschool.homework5.objecthelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.croc.javaschool.homework5.object.Task;
+import ru.croc.javaschool.homework5.Task;
+import ru.croc.javaschool.homework5.TaskManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class TaskManagerTest {
      */
     private ArrayList<Task> expectedTasks;
 
-    private TaskManager taskManager;
+    private ru.croc.javaschool.homework5.TaskManager taskManager;
 
     /**
      * Cleans expected tasks list.
@@ -25,7 +26,7 @@ public class TaskManagerTest {
     @BeforeEach
     public void clean() {
         expectedTasks = new ArrayList<>();
-        taskManager = new TaskManager();
+        taskManager = new ru.croc.javaschool.homework5.TaskManager();
     }
 
     /**
@@ -57,7 +58,7 @@ public class TaskManagerTest {
 
         expectedTasks.addAll(new ArrayList<>(Arrays.asList(t1, t3)));
 
-        taskManager = new TaskManager(new ArrayList<>(Arrays.asList(t1, t2, t3)));
+        taskManager = new ru.croc.javaschool.homework5.TaskManager(new ArrayList<>(Arrays.asList(t1, t2, t3)));
         taskManager.removeTask(0);
 
         Assertions.assertArrayEquals(expectedTasks.toArray(), taskManager.getTasks().toArray());
