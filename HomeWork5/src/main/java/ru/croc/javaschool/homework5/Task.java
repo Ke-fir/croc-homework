@@ -1,5 +1,7 @@
 package ru.croc.javaschool.homework5;
 
+import java.text.MessageFormat;
+
 /**
  * Work task.
  */
@@ -59,10 +61,10 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task o) {
-        if (this.code > o.code){
+        if (this.code > o.code) {
             return 1;
         } else {
-            if (this.code < o.code){
+            if (this.code < o.code) {
                 return -1;
             }
         }
@@ -71,7 +73,7 @@ public class Task implements Comparable<Task> {
 
     @Override
     public boolean equals(Object obj) {
-        var task = (Task)obj;
+        var task = (Task) obj;
         var equality = true;
         equality &= this.code == task.code &&
                 this.name.equals(task.name) &&
@@ -82,14 +84,20 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Makes this task a clone of another task.
+     * Makes from this task the clone of another task.
+     *
      * @param task task that should be cloned
      */
-    public void cloneOf(Task task){
+    public void cloneOf(Task task) {
         this.code = task.code;
         this.name = task.name;
         this.description = task.description;
         this.executor = task.executor;
         this.status = task.status;
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format("{0} \"{1}\" \"{2}\" \"{3}\" \"{4}\"", code, name, description, executor, status);
     }
 }
