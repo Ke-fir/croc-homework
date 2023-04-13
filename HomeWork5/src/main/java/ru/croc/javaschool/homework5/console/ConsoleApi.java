@@ -21,6 +21,7 @@ public class ConsoleApi {
         taskManager = new TaskManager(TasksFile.getTasksFromFile());
         while (true) {
             graphics = new Graphics(taskManager.getTasks());
+            graphics.printInfo();
             scanner = new Scanner(System.in);
             switch (scanner.nextInt()) {
                 case (1):
