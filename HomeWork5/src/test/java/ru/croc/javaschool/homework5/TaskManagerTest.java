@@ -62,6 +62,9 @@ public class TaskManagerTest {
         Assertions.assertArrayEquals(expectedTasks.toArray(), taskManager.getTasks().toArray());
     }
 
+    /**
+     * Tests editing of the task in list.
+     */
     @Test
     public void editTaskTest() {
         var t1 = new Task(17, "T1", "Task number 1", "Kirill", "In progress");
