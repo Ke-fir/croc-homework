@@ -1,8 +1,9 @@
-package ru.croc.javaschool.homework5;
+package ru.croc.javaschool.homework5.objecthelper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.croc.javaschool.homework5.object.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
