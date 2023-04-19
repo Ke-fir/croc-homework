@@ -20,30 +20,29 @@ public class ObjectConverter {
      */
     public static People convertProjectsToPeople(Projects projects) {
         var peopleList = new ArrayList<Person>(); // list of people
-        /* filling people list with managers */
+        /* firstly filling people list with managers of this project then specialists */
         for (var project : projects.getProjects()) {
             for (var manager : project.getManagers()) {
-                /* getting person with the same name as manager from people list */
-                var streamPerson = peopleList.stream().filter(x -> x.getName().equals(manager.getName())).findFirst().get();
                 /* if none found add new person */
-                if (streamPerson == null) {
+                if (peopleList.stream().noneMatch(x -> x.getName().equals(manager.getName()))) {
                     peopleList.add(new Person(manager.getName(), new ArrayList<>(Arrays.asList(
-                            new PersonsProject(project.getTitle(), "manager", "")))));
+                            new PersonsProject(project.getTitle(), "Менеджер", "")))));
                 } else {
+                    /* getting person with the same name as manager from people list */
+                    var streamPerson = peopleList.stream().filter(x -> x.getName().equals(manager.getName())).findFirst().get();
                     /* adding new project to person */
-                    streamPerson.getProjects().add(new PersonsProject(project.getTitle(), "manager", ""));
+                    streamPerson.getProjects().add(new PersonsProject(project.getTitle(), "Менеджер", ""));
                 }
             }
-        }
-        for (var project : projects.getProjects()) {
             for (var manager : project.getManagers()) {
                 for (var specialist : manager.getSpecialists()) {
-                    var streamPerson = peopleList.stream().filter(x -> x.getName().equals(specialist.getName())).findFirst().get();
-                    if (streamPerson == null) {
-                        peopleList.add(new Person(manager.getName(), new ArrayList<>(Arrays.asList(
-                                new PersonsProject(project.getTitle(), "specialist", manager.getName())))));
+                    if (peopleList.stream().noneMatch(x -> x.getName().equals(specialist.getName()))) {
+                        peopleList.add(new Person(specialist.getName(), new ArrayList<>(Arrays.asList(
+                                new PersonsProject(project.getTitle(), "Специалист", manager.getName())))));
                     } else {
-                        streamPerson.getProjects().add(new PersonsProject(project.getTitle(), "specialist",
+                        var streamPerson = peopleList.stream().filter(x -> x.getName().equals(specialist.getName()))
+                                .findFirst().get();
+                        streamPerson.getProjects().add(new PersonsProject(project.getTitle(), "Специалист",
                                 manager.getName()));
                     }
                 }
