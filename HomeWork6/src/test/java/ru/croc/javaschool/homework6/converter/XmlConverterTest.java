@@ -2,7 +2,6 @@ package ru.croc.javaschool.homework6.converter;
 
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.homework6.inputxmlobject.Manager;
 import ru.croc.javaschool.homework6.inputxmlobject.Project;
@@ -15,138 +14,14 @@ import ru.croc.javaschool.homework6.outxmlobject.PersonsProject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The class responsible for testing {@link XmlConverter}
+ */
 public class XmlConverterTest {
-    private String inputXML;
-
-    private String outXml;
-
-    private ArrayList<Project> projects = new ArrayList<>();
-
-    @BeforeEach
-    public void init() {
-        inputXML = "<projects>\n" +
-                "    <project>\n" +
-                "        <title>Проект 1</title>\n" +
-                "        <description>Описание 1</description>\n" +
-                "        <managers>\n" +
-                "            <manager name=\"Человек 1\">\n" +
-                "                <specialists>\n" +
-                "                    <specialist name=\"Человек 3\"/>\n" +
-                "                    <specialist name=\"Человек 4\"/>\n" +
-                "                </specialists>\n" +
-                "            </manager>\n" +
-                "            <manager name=\"Человек 2\">\n" +
-                "                <specialists>\n" +
-                "                    <specialist name=\"Человек 5\"/>\n" +
-                "                    <specialist name=\"Человек 6\"/>\n" +
-                "                </specialists>\n" +
-                "            </manager>\n" +
-                "        </managers>\n" +
-                "    </project>\n" +
-                "    <project>\n" +
-                "        <title>Проект 2</title>\n" +
-                "        <description>Описание 2</description>\n" +
-                "        <managers>\n" +
-                "            <manager name=\"Человек 3\">\n" +
-                "                <specialists>\n" +
-                "                    <specialist name=\"Человек 5\"/>\n" +
-                "                    <specialist name=\"Человек 6\"/>\n" +
-                "                </specialists>\n" +
-                "            </manager>\n" +
-                "            <manager name=\"Человек 4\">\n" +
-                "                <specialists>\n" +
-                "                    <specialist name=\"Человек 7\"/>\n" +
-                "                </specialists>\n" +
-                "            </manager>\n" +
-                "        </managers>\n" +
-                "    </project>\n" +
-                "</projects>";
-
-        outXml = "<people>\n" +
-                "    <person>\n" +
-                "        <name>Человек 1</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Менеджер</role>\n" +
-                "                <manager></manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 2</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Менеджер</role>\n" +
-                "                <manager></manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 3</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 1</manager>\n" +
-                "            </project>\n" +
-                "            <project title=\"Проект 2\">\n" +
-                "                <role>Менеджер</role>\n" +
-                "                <manager></manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 4</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 1</manager>\n" +
-                "            </project>\n" +
-                "            <project title=\"Проект 2\">\n" +
-                "                <role>Менеджер</role>\n" +
-                "                <manager></manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 5</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 2</manager>\n" +
-                "            </project>\n" +
-                "            <project title=\"Проект 2\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 3</manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 6</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 1\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 2</manager>\n" +
-                "            </project>\n" +
-                "            <project title=\"Проект 2\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 3</manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "    <person>\n" +
-                "        <name>Человек 7</name>\n" +
-                "        <projects>\n" +
-                "            <project title=\"Проект 2\">\n" +
-                "                <role>Специалист</role>\n" +
-                "                <manager>Человек 4</manager>\n" +
-                "            </project>\n" +
-                "        </projects>\n" +
-                "    </person>\n" +
-                "</people>";
-    }
 
     @Test
     public void deserializeProjectsTest() throws JAXBException {
+
         //region Initialization
         var testXml = "<projects>\n" +
                 "    <project>\n" +
@@ -184,6 +59,7 @@ public class XmlConverterTest {
 
     @Test
     public void serializePeopleTest() throws JAXBException {
+
         //region Initiation
         var expectedXml = "<people>" +
                 "<person>" +
@@ -229,5 +105,133 @@ public class XmlConverterTest {
         //endregion
         var actualXml = new XmlConverter().serializePeople(people);
         Assertions.assertEquals(expectedXml, actualXml);
+    }
+
+    @Test
+    public void convertProjectsXmlToPeopleXmlTest() throws JAXBException {
+        
+        //region Init
+        var inputXML = "<projects>\n" +
+                "    <project>\n" +
+                "        <title>Проект 1</title>\n" +
+                "        <description>Описание 1</description>\n" +
+                "        <managers>\n" +
+                "            <manager name=\"Человек 1\">\n" +
+                "                <specialists>\n" +
+                "                    <specialist name=\"Человек 3\"/>\n" +
+                "                    <specialist name=\"Человек 4\"/>\n" +
+                "                </specialists>\n" +
+                "            </manager>\n" +
+                "            <manager name=\"Человек 2\">\n" +
+                "                <specialists>\n" +
+                "                    <specialist name=\"Человек 5\"/>\n" +
+                "                    <specialist name=\"Человек 6\"/>\n" +
+                "                </specialists>\n" +
+                "            </manager>\n" +
+                "        </managers>\n" +
+                "    </project>\n" +
+                "    <project>\n" +
+                "        <title>Проект 2</title>\n" +
+                "        <description>Описание 2</description>\n" +
+                "        <managers>\n" +
+                "            <manager name=\"Человек 3\">\n" +
+                "                <specialists>\n" +
+                "                    <specialist name=\"Человек 5\"/>\n" +
+                "                    <specialist name=\"Человек 6\"/>\n" +
+                "                </specialists>\n" +
+                "            </manager>\n" +
+                "            <manager name=\"Человек 4\">\n" +
+                "                <specialists>\n" +
+                "                    <specialist name=\"Человек 7\"/>\n" +
+                "                </specialists>\n" +
+                "            </manager>\n" +
+                "        </managers>\n" +
+                "    </project>\n" +
+                "</projects>";
+
+        var expectedOutXml = "<people>" +
+                    "<person>" +
+                        "<name>Человек 1</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Менеджер</role>" +
+                                "<manager></manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 2</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Менеджер</role>" +
+                                "<manager></manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 3</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 1</manager>" +
+                            "</project>" +
+                            "<project title=\"Проект 2\">" +
+                                "<role>Менеджер</role>" +
+                                "<manager></manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 4</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 1</manager>" +
+                            "</project>" +
+                            "<project title=\"Проект 2\">" +
+                                "<role>Менеджер</role>" +
+                                "<manager></manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 5</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 2</manager>" +
+                            "</project>" +
+                            "<project title=\"Проект 2\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 3</manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 6</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 1\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 2</manager>" +
+                            "</project>" +
+                            "<project title=\"Проект 2\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 3</manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                    "<person>" +
+                        "<name>Человек 7</name>" +
+                        "<projects>" +
+                            "<project title=\"Проект 2\">" +
+                                "<role>Специалист</role>" +
+                                "<manager>Человек 4</manager>" +
+                            "</project>" +
+                        "</projects>" +
+                    "</person>" +
+                "</people>";
+        //endregion
+        var actualXml = new XmlConverter().convertProjectsXmlToPeopleXml(inputXML);
+        Assertions.assertArrayEquals(expectedOutXml.toCharArray(), actualXml.toCharArray());
     }
 }

@@ -30,4 +30,10 @@ public class XmlConverter {
         marshaller.marshal(people, stringWriter);
         return stringWriter.toString();
     }
+
+    public String convertProjectsXmlToPeopleXml(String projectsXml) throws JAXBException {
+        var projects = deserializeProjects(projectsXml);
+        var people = ObjectConverter.convertProjectsToPeople(projects);
+        return serializePeople(people);
+    }
 }
