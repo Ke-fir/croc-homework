@@ -16,10 +16,18 @@ public class People {
     @XmlElement(name = "person")
     private List<Person> people;
 
+    /**
+     * People constructor
+     *
+     * @param people
+     */
     public People(List<Person> people) {
         this.people = people;
     }
 
+    /**
+     * Empty people constructor
+     */
     public People() {
     }
 
@@ -29,6 +37,6 @@ public class People {
 
     @Override
     public boolean equals(Object obj) {
-        return this.people.equals(((People)obj).getPeople());
+        return this.people.equals(((People) obj).getPeople());
     }
 }

@@ -15,10 +15,11 @@ public class Projects {
      * List of projects
      */
     @XmlElement(name = "project")
-    private List<Project> projects = new ArrayList<>();
+    private final List<Project> projects = new ArrayList<>();
 
     /**
      * Projects constructor.
+     *
      * @param projects list of projects.
      */
     public Projects(List<Project> projects) {
@@ -28,7 +29,8 @@ public class Projects {
     /**
      * Empty constructor Projects constructor.
      */
-    public Projects(){}
+    public Projects() {
+    }
 
     public List<Project> getProjects() {
         return projects;
@@ -36,7 +38,7 @@ public class Projects {
 
     @Override
     public boolean equals(Object obj) {
-        var projects = (Projects)obj;
+        var projects = (Projects) obj;
         return this.projects.equals(projects.getProjects());
     }
 }

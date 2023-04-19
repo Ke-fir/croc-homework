@@ -20,7 +20,7 @@ public class ObjectConverter {
      */
     public static People convertProjectsToPeople(Projects projects) {
         var peopleList = new ArrayList<Person>(); // list of people
-        /* firstly filling people list with managers of this project then specialists */
+        /* firstly filling people list with managers of this project then with specialists */
         for (var project : projects.getProjects()) {
             for (var manager : project.getManagers()) {
                 /* if none found add new person */

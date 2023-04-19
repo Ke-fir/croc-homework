@@ -13,6 +13,11 @@ public class Specialist {
     @XmlAttribute(name = "name")
     private String name;
 
+    /**
+     * Specialists constructor
+     *
+     * @param name name of specialist
+     */
     public Specialist(String name) {
         this.name = name;
     }
@@ -26,6 +31,6 @@ public class Specialist {
 
     @Override
     public boolean equals(Object obj) {
-        return this.name.equals(((Specialist)obj).getName());
+        return this.name.equals(((Specialist) obj).getName());
     }
 }

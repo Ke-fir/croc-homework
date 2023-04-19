@@ -5,19 +5,37 @@ import jakarta.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class responsible for person object. Contains fields: name, projects.
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
+    /**
+     * Name of person
+     */
     @XmlElement(name = "name")
     private String name;
+
+    /**
+     * List of projects.
+     */
     @XmlElementWrapper(name = "projects")
     @XmlElement(name = "project")
-    private List<PersonsProject> projects = new ArrayList<>();
+    private final List<PersonsProject> projects = new ArrayList<>();
 
+    /**
+     * Persons constructor
+     * @param name name of pearson
+     * @param projects list of projects
+     */
     public Person(String name, List<PersonsProject> projects) {
         this.name = name;
         this.projects.addAll(projects);
     }
 
+    /**
+     * Empty person constructor
+     */
     public Person() {
     }
 

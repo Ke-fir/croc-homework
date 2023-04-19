@@ -20,6 +20,12 @@ public class Manager {
     @XmlElement(name = "specialist")
     private List<Specialist> specialists;
 
+    /**
+     * Manager constructor.
+     *
+     * @param name        name of manager
+     * @param specialists list of specialists
+     */
     public Manager(String name, List<Specialist> specialists) {
         this.name = name;
         this.specialists = specialists;
@@ -38,7 +44,7 @@ public class Manager {
 
     @Override
     public boolean equals(Object obj) {
-        var manager = (Manager)obj;
+        var manager = (Manager) obj;
         var result = true;
         result &= this.name.equals(manager.getName());
         result &= this.specialists.equals(manager.getSpecialists());
