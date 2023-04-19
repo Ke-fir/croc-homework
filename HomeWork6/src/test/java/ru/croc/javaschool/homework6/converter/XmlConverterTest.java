@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework6;
+package ru.croc.javaschool.homework6.converter;
 
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Assertions;
