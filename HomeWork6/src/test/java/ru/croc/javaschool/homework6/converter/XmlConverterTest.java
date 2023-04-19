@@ -186,37 +186,37 @@ public class XmlConverterTest {
     public void serializePeopleTest() throws JAXBException {
         //region Initiation
         var expectedXml = "<people>" +
-                    "<person>" +
-                        "<name>Человек 1</name>" +
-                        "<projects>" +
-                            "<project title=\"Проект 1\">" +
-                                "<role>Менеджер</role>" +
-                                "<manager></manager>" +
-                            "</project>" +
-                        "</projects>" +
-                    "</person>" +
-                    "<person>" +
-                        "<name>Человек 2</name>" +
-                        "<projects>" +
-                            "<project title=\"Проект 1\">" +
-                                "<role>Менеджер</role>" +
-                                "<manager></manager>" +
-                            "</project>" +
-                        "</projects>" +
-                    "</person>" +
-                    "<person>" +
-                        "<name>Человек 3</name>" +
-                        "<projects>" +
-                            "<project title=\"Проект 1\">" +
-                                "<role>Специалист</role>" +
-                                "<manager>Человек 1</manager>" +
-                            "</project>" +
-                            "<project title=\"Проект 2\">" +
-                                "<role>Менеджер</role>" +
-                                "<manager></manager>" +
-                            "</project>" +
-                        "</projects>" +
-                    "</person>" +
+                "<person>" +
+                "<name>Человек 1</name>" +
+                "<projects>" +
+                "<project title=\"Проект 1\">" +
+                "<role>Менеджер</role>" +
+                "<manager></manager>" +
+                "</project>" +
+                "</projects>" +
+                "</person>" +
+                "<person>" +
+                "<name>Человек 2</name>" +
+                "<projects>" +
+                "<project title=\"Проект 1\">" +
+                "<role>Менеджер</role>" +
+                "<manager></manager>" +
+                "</project>" +
+                "</projects>" +
+                "</person>" +
+                "<person>" +
+                "<name>Человек 3</name>" +
+                "<projects>" +
+                "<project title=\"Проект 1\">" +
+                "<role>Специалист</role>" +
+                "<manager>Человек 1</manager>" +
+                "</project>" +
+                "<project title=\"Проект 2\">" +
+                "<role>Менеджер</role>" +
+                "<manager></manager>" +
+                "</project>" +
+                "</projects>" +
+                "</person>" +
                 "</people>";
         var pers1 = new Person("Человек 1",
                 new ArrayList<>(Arrays.asList(new PersonsProject("Проект 1", "Менеджер", ""))));
