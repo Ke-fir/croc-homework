@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework6.inputxmlobjects;
+package ru.croc.javaschool.homework6.inputxmlobject;
 
 import jakarta.xml.bind.annotation.*;
 

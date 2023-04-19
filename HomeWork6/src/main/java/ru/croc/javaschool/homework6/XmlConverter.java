@@ -3,8 +3,8 @@ package ru.croc.javaschool.homework6;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
-import ru.croc.javaschool.homework6.inputxmlobjects.Projects;
-import ru.croc.javaschool.homework6.outxmlobjects.People;
+import ru.croc.javaschool.homework6.inputxmlobject.Projects;
+import ru.croc.javaschool.homework6.outxmlobject.People;
 
 import java.io.StringReader;
 import java.io.StringWriter;
