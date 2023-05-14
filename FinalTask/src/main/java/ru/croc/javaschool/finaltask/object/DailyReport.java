@@ -1,8 +1,8 @@
-package ru.croc.javaschool.finaltask.object.objecthelper;
+package ru.croc.javaschool.finaltask.object;
 
 import jakarta.xml.bind.annotation.*;
-import ru.croc.javaschool.finaltask.object.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.object.InfectionsReport;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import ru.croc.javaschool.finaltask.objecthelper.LocalDateAdapter;
 
 import java.time.LocalDate;
 
@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DailyReport {
     @XmlAttribute(name = "date")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate date;
     @XmlElement(name = "infectionCasesCount")
     private int infectionCasesCount;
@@ -56,6 +57,17 @@ public class DailyReport {
         return new InfectionsReport(date, infectionCasesCount, recoveryCasesCount);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        DailyReport rep = (DailyReport) obj;
+        return this.date.equals(rep.date) &&
+                this.dischargingCasesCount == rep.dischargingCasesCount &&
+                this.hospitalizationCasesCount == rep.hospitalizationCasesCount &&
+                this.recoveryCasesCount == rep.recoveryCasesCount &&
+                this.infectionCasesCount == rep.infectionCasesCount;
+    }
+
+    //region GetSet
     public LocalDate getDate() {
         return date;
     }
@@ -75,4 +87,5 @@ public class DailyReport {
     public int getDischargingCasesCount() {
         return dischargingCasesCount;
     }
+    //endregion
 }

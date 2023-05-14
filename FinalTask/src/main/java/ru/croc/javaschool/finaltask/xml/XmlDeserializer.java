@@ -2,7 +2,7 @@ package ru.croc.javaschool.finaltask.xml;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-import ru.croc.javaschool.finaltask.object.objecthelper.DailyReport;
+import ru.croc.javaschool.finaltask.object.DailyReport;
 
 import java.io.StringReader;
 
