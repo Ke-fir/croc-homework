@@ -32,6 +32,15 @@ public class InfectionsReport {
     public InfectionsReport() {
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        var rep = (InfectionsReport)obj;
+        return this.date.equals(rep.date) &&
+                this.infectionCasesCount == rep.infectionCasesCount &&
+                this.recoveryCasesCount == rep.recoveryCasesCount;
+    }
+
+    //region GetSet
     public LocalDate getDate() {
         return date;
     }
@@ -55,4 +64,5 @@ public class InfectionsReport {
     public void setRecoveryCasesCount(int recoveryCasesCount) {
         this.recoveryCasesCount = recoveryCasesCount;
     }
+    //endregion
 }

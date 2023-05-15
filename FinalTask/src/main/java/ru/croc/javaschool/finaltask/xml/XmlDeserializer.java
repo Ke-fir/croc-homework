@@ -61,7 +61,7 @@ public class XmlDeserializer {
     public List<DailyReport> deserializeFromDirectory(String directoryPath, LocalDate startDate, LocalDate endDate) {
         ArrayList<DailyReport> reports = new ArrayList<>();
         File[] fList = new File(directoryPath).listFiles();
-        
+
         if (fList != null) {
             for (File file : fList) {
                 try {
