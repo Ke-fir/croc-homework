@@ -4,9 +4,6 @@ import ru.croc.javaschool.finaltask.object.HospitalizationsReport;
 import ru.croc.javaschool.finaltask.object.InfectionsReport;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The class responsible for work with database.
@@ -91,6 +88,7 @@ public class DatabaseHandler {
                 statement.setString(1, report.getDate().toString());
                 statement.setInt(2, report.getHospitalizationsCount());
                 statement.setInt(3, report.getDischargedCount());
+                statement.executeUpdate();
                 return true;
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -98,41 +96,5 @@ public class DatabaseHandler {
         }
         System.err.println("Not all tables exist");
         return false;
-    }
-
-    public List<HospitalizationsReport> readHospitalizations() {
-        var result = new ArrayList<HospitalizationsReport>();
-        try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()) {
-            var resultSet = statement.executeQuery("SELECT * FROM Hospitalization_stats");
-            while (resultSet.next()) {
-                result.add( new HospitalizationsReport(
-                        LocalDate.parse(resultSet.getString(1)),
-                        resultSet.getInt(2),
-                        resultSet.getInt(3)));
-            }
-            return result;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public List<InfectionsReport> readInfections() {
-        var result = new ArrayList<InfectionsReport>();
-        try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()) {
-            var resultSet = statement.executeQuery("SELECT * FROM Infection_stats");
-            while (resultSet.next()) {
-                result.add( new InfectionsReport(
-                        LocalDate.parse(resultSet.getString(1)),
-                        resultSet.getInt(2),
-                        resultSet.getInt(3)));
-            }
-            return result;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
     }
 }

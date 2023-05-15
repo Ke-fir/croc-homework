@@ -41,6 +41,15 @@ public class HospitalizationsReport {
     public HospitalizationsReport() {
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        var rep = (HospitalizationsReport)obj;
+        return this.date.equals(rep.date) &&
+                this.hospitalizationsCount == rep.hospitalizationsCount &&
+                this.dischargedCount == rep.dischargedCount;
+    }
+
+    //region GetSet
     public LocalDate getDate() {
         return date;
     }
@@ -64,4 +73,5 @@ public class HospitalizationsReport {
     public void setDischargedCount(int dischargedCount) {
         this.dischargedCount = dischargedCount;
     }
+    //endregion
 }
