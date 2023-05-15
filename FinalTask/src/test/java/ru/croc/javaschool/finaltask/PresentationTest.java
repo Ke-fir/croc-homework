@@ -1,24 +1,36 @@
 package ru.croc.javaschool.finaltask;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import ru.croc.javaschool.finaltask.database.DatabaseHandler;
+import ru.croc.javaschool.finaltask.object.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.object.InfectionsReport;
+import ru.croc.javaschool.finaltask.xml.XmlDeserializer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 
 /**
  * The class responsible for presenting demo scenery.
  */
 public class PresentationTest {
-
-    @BeforeAll
+    private final String directoryName = "reports";
+    private  ArrayList<InfectionsReport> expectedInfectionReports = new ArrayList<>();
+    private ArrayList<HospitalizationsReport> expectedHospitalizationReports = new ArrayList<>();
+    @BeforeEach
     public void init() {
         // creating directory with reports if not created
-        File directory = new File("Reports");
+        File directory = new File(directoryName);
         directory.mkdir();
         // creating 7 files in directory (like we work with xml ones per week)
-        for (int day = 8; day < 15; day++) {
+        for (int day = 15; day < 22; day++) {
             String sDate = "2023-05-" + day;
             String filename = sDate + ".xml";
             var file = new File(directory, filename);
@@ -27,18 +39,80 @@ public class PresentationTest {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            // some random numbers, no logic
+            int infectionCasesNumber = day * 100;
+            int recoveryCasesNumber = day * 100 + 20;
+            int hospitalizationsNumber = day * 90;
+            int dischargedNumber = day + 3 * 90;
             String xml = "<report date=\"" + sDate + "\">\n" +
-                    "    <infectionCasesNumber>" + day * 100 + "</infectionCasesNumber>\n" +
-                    "    <recoveryCasesNumber>" + (day * 100 + 20) + "</recoveryCasesNumber>\n" +
-                    "    <hospitalizationsNumber>" + day * 90 + "</hospitalizationsNumber>\n" +
-                    "    <dischargedNumber>" + (day * 90 + 10) + "</dischargedNumber>\n" +
+                    "    <infectionCasesCount>" + infectionCasesNumber + "</infectionCasesCount>\n" +
+                    "    <recoveryCasesCount>" + recoveryCasesNumber + "</recoveryCasesCount>\n" +
+                    "    <hospitalizationCasesCount>" + hospitalizationsNumber + "</hospitalizationCasesCount>\n" +
+                    "    <dischargingCasesCount>" + dischargedNumber + "</dischargingCasesCount>\n" +
                     "</report>";
+            // adding info to expected reports
+            expectedInfectionReports.add(new InfectionsReport(LocalDate.parse(sDate), infectionCasesNumber,
+                    recoveryCasesNumber));
+            expectedHospitalizationReports.add(new HospitalizationsReport(LocalDate.parse(sDate),
+                    hospitalizationsNumber, dischargedNumber));
+            //writing xml to file
             try (var pw = new PrintWriter(file)) {
                 pw.write(xml);
             } catch (FileNotFoundException ex) {
                 System.err.println("Произошла ошибка при записи в файл: " + ex.getLocalizedMessage());
             }
-
         }
+    }
+
+    /**
+     * Presents working scenery.
+     */
+    @Test
+    public void present() {
+        var actualInfectionReports = new ArrayList<InfectionsReport>();
+        var actualHospitalizationReports = new ArrayList<HospitalizationsReport>();
+        XmlDeserializer deserializer = new XmlDeserializer();
+        // getting daily reports from directory "reports"
+        var dailyReports = deserializer.deserializeFromDirectory(directoryName, LocalDate.of(2023, Month.MAY, 15),
+                LocalDate.of(2023, Month.MAY, 21));
+        DatabaseHandler handler = new DatabaseHandler();
+
+        // writing reports from xml to database
+        if (handler.writeReportsToDatabase(dailyReports)) {
+            // region checking_results_for_test
+            try (Connection connection = DriverManager.getConnection(handler.url);
+            Statement statement = connection.createStatement()) {
+                // reading back results from DB
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM " + handler.hospitalizationTableName);
+                while (resultSet.next()) {
+                    actualHospitalizationReports.add(new HospitalizationsReport(
+                            LocalDate.parse(resultSet.getString(1)),
+                            resultSet.getInt(2),
+                            resultSet.getInt(3)));
+                }
+                resultSet = statement.executeQuery("SELECT * FROM " + handler.infectionTableName);
+                while (resultSet.next()) {
+                    actualInfectionReports.add(new InfectionsReport(
+                            LocalDate.parse(resultSet.getString(1)),
+                            resultSet.getInt(2),
+                            resultSet.getInt(3)));
+                }
+                // deleting added records
+                for (var rep : expectedInfectionReports) {
+                    statement.executeUpdate("DELETE FROM " + handler.infectionTableName +
+                            " WHERE date = '" + rep.getDate().toString() + "'");
+                }
+                for (var rep : expectedHospitalizationReports) {
+                    statement.executeUpdate("DELETE FROM " + handler.hospitalizationTableName +
+                            " WHERE date = '" + rep.getDate().toString() + "'");
+                }
+            } catch (SQLException ex) {
+                System.err.println("Произошла ошибка при чтении данных из таблицы или удаления временных записей: " +
+                        ex.getLocalizedMessage());
+            }
+            // endregion
+        }
+        Assertions.assertEquals(expectedHospitalizationReports, actualHospitalizationReports);
+        Assertions.assertEquals(expectedInfectionReports, actualInfectionReports);
     }
 }
