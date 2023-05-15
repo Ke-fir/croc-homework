@@ -56,6 +56,7 @@ public class XmlDeserializerTest {
 
         var deserializer = new XmlDeserializer();
         var actualReport = deserializer.deserialize(tempFile);
+        tempFile.delete();
         Assertions.assertEquals(expectedReport, actualReport);
     }
 
