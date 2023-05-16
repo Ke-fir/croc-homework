@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.finaltask.database.DatabaseHandler;
-import ru.croc.javaschool.finaltask.object.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.object.InfectionsReport;
-import ru.croc.javaschool.finaltask.xml.XmlDeserializer;
+import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.service.xml.XmlDeserializer;
 
 import java.io.File;
 import java.io.FileNotFoundException;

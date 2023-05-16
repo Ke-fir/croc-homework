@@ -1,4 +1,4 @@
-package ru.croc.javaschool.finaltask.object;
+package ru.croc.javaschool.finaltask.model.output;
 
 import java.time.LocalDate;
 

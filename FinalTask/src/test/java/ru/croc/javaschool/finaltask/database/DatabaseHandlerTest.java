@@ -2,9 +2,9 @@ package ru.croc.javaschool.finaltask.database;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.croc.javaschool.finaltask.object.DailyReport;
-import ru.croc.javaschool.finaltask.object.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.object.InfectionsReport;
+import ru.croc.javaschool.finaltask.model.input.DailyReport;
+import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

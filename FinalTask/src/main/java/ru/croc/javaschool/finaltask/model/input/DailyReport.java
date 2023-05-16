@@ -1,8 +1,10 @@
-package ru.croc.javaschool.finaltask.object;
+package ru.croc.javaschool.finaltask.model.input;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import ru.croc.javaschool.finaltask.objecthelper.LocalDateAdapter;
+import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.service.objectadapter.LocalDateAdapter;
 
 import java.time.LocalDate;
 
