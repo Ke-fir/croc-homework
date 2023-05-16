@@ -85,9 +85,9 @@ public class DailyReportServiceTest {
          var repList = new ArrayList<DailyReport>(Arrays.asList(report1, report2, report3));
          ds.createAllReports(repList);
          for (var rep : repList) {
-             Assertions.assertTrue(iRepository.find(rep.getDate()) != null);
+             Assertions.assertNotNull(iRepository.find(rep.getDate()));
              iRepository.delete(rep.getDate());
-             Assertions.assertTrue(hRepository.find(rep.getDate()) != null);
+             Assertions.assertNotNull(hRepository.find(rep.getDate()));
              hRepository.delete(rep.getDate());
          }
      }
