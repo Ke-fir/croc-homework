@@ -27,4 +27,12 @@ public interface ReportRepository<T> {
      * @return Report.
      */
     T find(LocalDate date);
+
+    /**
+     * Deletes report with suitable date from table.
+     *
+     * @param date Date of report.
+     * @return True if work was done. False if sth went wrong.
+     */
+    boolean delete(LocalDate date);
 }

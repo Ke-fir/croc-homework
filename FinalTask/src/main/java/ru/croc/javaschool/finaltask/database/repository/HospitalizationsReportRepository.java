@@ -3,10 +3,9 @@ package ru.croc.javaschool.finaltask.database.repository;
 import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * The class responsible for hospitalization report repository.
@@ -54,38 +53,47 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
 
     @Override
     public boolean create(HospitalizationsReport report) {
-        System.out.println("Добавление записи в таблицу " + TABLE_NAME);
+        // checking if record already exists in table
+        if (Objects.isNull(
+                find(report.getDate()))) {
+            System.out.println("Добавление записи в таблицу " + TABLE_NAME);
 
-        String insertQuery = "INSERT INTO "
-                + TABLE_NAME
-                + " VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO "
+                    + TABLE_NAME
+                    + " VALUES (?, ?, ?)";
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-            statement.setString(
-                    1,
-                    report.getDate().toString());
-            statement.setInt(
-                    2,
-                    report.getHospitalizationsCount());
-            statement.setInt(
-                    3,
-                    report.getDischargedCount());
-            statement.executeUpdate();
+            try (Connection connection = dataSource.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+                statement.setString(
+                        1,
+                        report.getDate().toString());
+                statement.setInt(
+                        2,
+                        report.getHospitalizationsCount());
+                statement.setInt(
+                        3,
+                        report.getDischargedCount());
+                statement.executeUpdate();
 
-            System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
-            return true;
-        } catch (SQLException ex) {
-            System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
-            return false;
+                System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
+                return true;
+            } catch (SQLException ex) {
+                System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
+            }
+        } else {
+            System.err.printf("Произошла ошибка при добавлении записи в %s: запись с датой %s уже существует",
+                    TABLE_NAME,
+                    report.getDate()
+            );
         }
+        return false;
     }
 
     /**
      * Finds hospitalization report in database due to its date.
      *
      * @param date Date of report.
-     * @return Hospitalization report with suitable date.
+     * @return Hospitalization report with suitable date. Or null if none was found.
      */
     @Override
     public HospitalizationsReport find(LocalDate date) {
@@ -111,5 +119,35 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
         }
 
         return report;
+    }
+
+    @Override
+    public boolean delete(LocalDate date) {
+        // checking if there is deleting report in the table
+        if (!Objects.isNull(find(date))) {
+            System.out.printf("Удаление записи %s из таблицы $s", date, TABLE_NAME);
+
+            String deleteQuery = String.format("DELETE FROM "
+                    + TABLE_NAME
+                    + " WHERE "
+                    + "date = '%s'", date);
+            try (Connection connection = dataSource.getConnection();
+                 Statement statement = connection.createStatement()) {
+                statement.executeUpdate(deleteQuery);
+                System.out.printf("Запись %s удалена успешно", date);
+                return true;
+            } catch (SQLException e) {
+                System.err.printf("При удалении %s из %s произошла ошибка: %s",
+                        date,
+                        TABLE_NAME,
+                        e.getLocalizedMessage()
+                );
+            }
+        } else {
+            System.err.printf("Произошла ошибка при удалении записи %s: ее не существует в %s",
+                    date,
+                    TABLE_NAME);
+        }
+        return false;
     }
 }

@@ -6,7 +6,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * The class responsible for infection report repository.
@@ -55,31 +57,42 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
 
     @Override
     public boolean create(InfectionsReport report) {
-        System.out.println("Добавление записи в таблицу " + TABLE_NAME);
+        // checking if record already exists in table
+        if (Objects.isNull(
+                find(report.getDate())
+        )) {
+            System.out.println("Добавление записи в таблицу " + TABLE_NAME);
 
-        String insertQuery = "INSERT INTO "
-                + TABLE_NAME
-                + " VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO "
+                    + TABLE_NAME
+                    + " VALUES (?, ?, ?)";
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-            statement.setString(
-                    1,
-                    report.getDate().toString());
-            statement.setInt(
-                    2,
-                    report.getInfectionCasesCount());
-            statement.setInt(
-                    3,
-                    report.getRecoveryCasesCount());
-            statement.executeUpdate();
+            try (Connection connection = dataSource.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+                statement.setString(
+                        1,
+                        report.getDate().toString());
+                statement.setInt(
+                        2,
+                        report.getInfectionCasesCount());
+                statement.setInt(
+                        3,
+                        report.getRecoveryCasesCount());
+                statement.executeUpdate();
 
-            System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
-            return true;
-        } catch (SQLException ex) {
-            System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
-            return false;
+                System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
+                return true;
+            } catch (SQLException ex) {
+                System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
+
+            }
+        } else {
+            System.err.printf("Произошла ошибка при добавлении записи в %s: запись с датой %s уже существует",
+                    TABLE_NAME,
+                    report.getDate()
+            );
         }
+        return false;
     }
 
     @Override
@@ -104,7 +117,36 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
             System.err.printf("Возникла ошибка выполнения запроса (поиск) в таблице %s: %s ", TABLE_NAME,
                     e.getLocalizedMessage());
         }
-
         return report;
+    }
+
+    @Override
+    public boolean delete(LocalDate date) {
+        // checking if there is deleting report in the table
+        if (!Objects.isNull(find(date))) {
+            System.out.printf("Удаление записи %s из таблицы $s", date, TABLE_NAME);
+
+            String deleteQuery = String.format("DELETE FROM "
+                    + TABLE_NAME
+                    + " WHERE "
+                    + "date = '%s'", date);
+            try (Connection connection = dataSource.getConnection();
+                 Statement statement = connection.createStatement()) {
+                statement.executeUpdate(deleteQuery);
+                System.out.printf("Запись %s удалена успешно", date);
+                return true;
+            } catch (SQLException e) {
+                System.err.printf("При удалении %s из %s произошла ошибка: %s",
+                        date,
+                        TABLE_NAME,
+                        e.getLocalizedMessage()
+                );
+            }
+        } else {
+            System.err.printf("Произошла ошибка при удалении записи %s: ее не существует в %s",
+                    date,
+                    TABLE_NAME);
+        }
+        return false;
     }
 }
