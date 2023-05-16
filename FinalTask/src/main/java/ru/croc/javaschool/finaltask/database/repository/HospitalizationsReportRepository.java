@@ -15,13 +15,13 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
     private final DataSource dataSource;
     public final String TABLE_NAME = "Hospitalization_stats";
 
-    public HospitalizationsReportRepository(DataSource dataSource) {
+    public HospitalizationsReportRepository(DataSource dataSource) throws SQLException {
         this.dataSource = dataSource;
         initTable();
     }
 
     @Override
-    public boolean initTable() {
+    public boolean initTable() throws SQLException {
         System.out.println("Инициализация таблицы: " + TABLE_NAME);
         try (var connection = dataSource.getConnection();
              var statement = connection.createStatement()) {
@@ -32,7 +32,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                     TABLE_NAME.toUpperCase(),
                     null);
             if (resultSet.next()) {
-                System.out.println("Таблица уже существует");
+                System.err.println("Таблица уже существует");
             } else {
                 statement.executeUpdate(
                         "CREATE TABLE "
@@ -46,8 +46,8 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
             }
             return true;
         } catch (SQLException e) {
-            System.out.println(String.format("Возникла ошибка при создании таблицы %s: ", TABLE_NAME) + e.getMessage());
-            return false;
+            System.err.println(String.format("Возникла ошибка при создании таблицы %s: ", TABLE_NAME) + e.getMessage());
+            throw e;
         }
     }
 
@@ -75,13 +75,13 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                         report.getDischargedCount());
                 statement.executeUpdate();
 
-                System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
+                System.out.printf("Запись в %s добавлена успешно\n", TABLE_NAME);
                 return true;
             } catch (SQLException ex) {
                 System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
             }
         } else {
-            System.err.printf("Произошла ошибка при добавлении записи в %s: запись с датой %s уже существует",
+            System.err.printf("Произошла ошибка при добавлении записи в %s: запись с датой %s уже существует\n",
                     TABLE_NAME,
                     report.getDate()
             );
@@ -125,7 +125,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
     public boolean delete(LocalDate date) {
         // checking if there is deleting report in the table
         if (!Objects.isNull(find(date))) {
-            System.out.printf("Удаление записи %s из таблицы $s", date, TABLE_NAME);
+            System.out.printf("Удаление записи %s из таблицы %s\n", date, TABLE_NAME);
 
             String deleteQuery = String.format("DELETE FROM "
                     + TABLE_NAME

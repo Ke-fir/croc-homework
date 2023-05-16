@@ -1,5 +1,6 @@
 package ru.croc.javaschool.finaltask.database.repository;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +12,7 @@ public interface ReportRepository<T> {
      *
      * @return True if work was done. False if sth went wrong.
      */
-    boolean initTable();
+    boolean initTable() throws SQLException;
 
     /**
      * Creates record in table.

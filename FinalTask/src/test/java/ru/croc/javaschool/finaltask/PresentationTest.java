@@ -3,9 +3,12 @@ package ru.croc.javaschool.finaltask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.croc.javaschool.finaltask.database.DatabaseHandler;
+import ru.croc.javaschool.finaltask.database.provider.DataSourceProvider;
+import ru.croc.javaschool.finaltask.database.repository.HospitalizationsReportRepository;
+import ru.croc.javaschool.finaltask.database.repository.InfectionsReportRepository;
 import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
 import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.service.DailyReportService;
 import ru.croc.javaschool.finaltask.service.xml.XmlDeserializer;
 
 import java.io.File;
@@ -68,50 +71,39 @@ public class PresentationTest {
      * Presents working scenery.
      */
     @Test
-    public void present() {
+    public void present() throws SQLException {
         var actualInfectionReports = new ArrayList<InfectionsReport>();
         var actualHospitalizationReports = new ArrayList<HospitalizationsReport>();
         XmlDeserializer deserializer = new XmlDeserializer();
         // getting daily reports from directory "reports"
         var dailyReports = deserializer.deserializeFromDirectory(directoryName, LocalDate.of(2023, Month.MAY, 15),
                 LocalDate.of(2023, Month.MAY, 21));
-        DatabaseHandler handler = new DatabaseHandler();
 
-        // writing reports from xml to database
-        if (handler.writeReportsToDatabase(dailyReports)) {
-            // region checking_results_for_test
-            try (Connection connection = DriverManager.getConnection(handler.url);
-            Statement statement = connection.createStatement()) {
-                // reading back results from DB
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM " + handler.hospitalizationTableName);
-                while (resultSet.next()) {
-                    actualHospitalizationReports.add(new HospitalizationsReport(
-                            LocalDate.parse(resultSet.getString(1)),
-                            resultSet.getInt(2),
-                            resultSet.getInt(3)));
-                }
-                resultSet = statement.executeQuery("SELECT * FROM " + handler.infectionTableName);
-                while (resultSet.next()) {
-                    actualInfectionReports.add(new InfectionsReport(
-                            LocalDate.parse(resultSet.getString(1)),
-                            resultSet.getInt(2),
-                            resultSet.getInt(3)));
-                }
-                // deleting added records
-                for (var rep : expectedInfectionReports) {
-                    statement.executeUpdate("DELETE FROM " + handler.infectionTableName +
-                            " WHERE date = '" + rep.getDate().toString() + "'");
-                }
-                for (var rep : expectedHospitalizationReports) {
-                    statement.executeUpdate("DELETE FROM " + handler.hospitalizationTableName +
-                            " WHERE date = '" + rep.getDate().toString() + "'");
-                }
-            } catch (SQLException ex) {
-                System.err.println("Произошла ошибка при чтении данных из таблицы или удаления временных записей: " +
-                        ex.getLocalizedMessage());
-            }
-            // endregion
+        // initialization
+        var dataSource = new DataSourceProvider().getDataSource();
+        var infectionTableRepository = new InfectionsReportRepository(dataSource);
+        var hospitalizationTableRepository = new HospitalizationsReportRepository(dataSource);
+        var dailyReportsService = new DailyReportService(hospitalizationTableRepository, infectionTableRepository);
+
+        // adding all deserialized daily reports from directory to DB
+        dailyReportsService.createAllReports(dailyReports);
+
+        for (var dailyReport : dailyReports) {
+            var date = dailyReport.getDate();
+            // adding report from DB to actual list
+            actualInfectionReports.add(
+                    infectionTableRepository.find(date)
+            );
+            // deleting temporary record from DB
+            infectionTableRepository.delete(date);
+            // adding report from DB to actual list
+            actualHospitalizationReports.add(
+                    hospitalizationTableRepository.find(date)
+            );
+            // deleting temporary record from DB
+            hospitalizationTableRepository.delete(date);
         }
+
         Assertions.assertEquals(expectedHospitalizationReports, actualHospitalizationReports);
         Assertions.assertEquals(expectedInfectionReports, actualInfectionReports);
     }
