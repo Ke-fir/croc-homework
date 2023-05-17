@@ -9,6 +9,9 @@ import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The class for testing hospitalization repository.
@@ -33,7 +36,7 @@ public class HospitalizationsReportRepositoryTest {
     }
 
     @Test
-    public void findTest() throws SQLException {
+    public void findByDateTest() throws SQLException {
         repository.create(expectedReport);
         var actualrep = repository.findByDate(expectedReport.getDate());
         Assertions.assertEquals(expectedReport, actualrep);
@@ -43,6 +46,28 @@ public class HospitalizationsReportRepositoryTest {
          * but @AfterEach tries to delete it ones more time.
          */
         repository.deleteByDate(expectedReport.getDate());
+    }
+
+    @Test
+    public void findByDateRangeTest() {
+        var reports = new ArrayList<HospitalizationsReport>(
+                Arrays.asList(
+                        new HospitalizationsReport(LocalDate.of(2023, Month.MAY,15), 0, 0),
+                        new HospitalizationsReport(LocalDate.of(2023, Month.MAY ,16), 1, 1),
+                        new HospitalizationsReport(LocalDate.of(2023, Month.MAY, 17), 2,2)
+                )
+        );
+        for (var rep : reports) {
+            repository.create(rep);
+        }
+        var actualReports = repository.findByDateRange(
+                LocalDate.of(2023, Month.MAY,15),
+                LocalDate.of(2023, Month.MAY ,17)
+        );
+        Assertions.assertEquals(reports, actualReports);
+        for (var rep : actualReports) {
+            repository.deleteByDate(rep.getDate());
+        }
     }
 
     @Test

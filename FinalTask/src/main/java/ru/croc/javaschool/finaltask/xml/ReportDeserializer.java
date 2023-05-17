@@ -9,11 +9,12 @@ import java.io.StringReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The class responsible for deserialization input xml to objects.
  */
-public class XmlDeserializer {
+public class ReportDeserializer {
     /**
      * Unmarshal XML string to daily report object.
      *
@@ -50,15 +51,12 @@ public class XmlDeserializer {
     }
 
     /**
-     * Deserialize every file in directory that's date is between start & end dates.
-     * Can be used for deserializing files for some time period.
+     * Deserialize all files in named directory to reports.
      *
      * @param directoryPath Path of directory
-     * @param startDate Start date of time period
-     * @param endDate End date of time period
      * @return List of reports. Empty list if no of files in directory can be deserialized.
      */
-    public List<DailyReport> deserializeFromDirectory(String directoryPath, LocalDate startDate, LocalDate endDate) {
+    public List<DailyReport> deserializeFromDirectory(String directoryPath) {
         ArrayList<DailyReport> reports = new ArrayList<>();
         File[] fList = new File(directoryPath).listFiles();
 
@@ -66,14 +64,33 @@ public class XmlDeserializer {
             for (File file : fList) {
                 try {
                     var report = deserialize(file);
-                    if (startDate.compareTo(report.getDate()) < 1 && endDate.compareTo(report.getDate()) > -1) {
-                        reports.add(report);
-                    }
+                    reports.add(report);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    System.err.println("Произошла ошибка при десериализации файлов директории: "
+                            + ex.getLocalizedMessage());
                 }
             }
         }
         return reports;
+    }
+
+    /**
+     * Deserialize every file in directory which date is in the range.
+     *
+     * @param directoryPath Path of directory
+     * @param startDate     Start date of time period
+     * @param endDate       End date of time period
+     * @return List of reports. Empty list if no of files in directory can be deserialized.
+     */
+    public List<DailyReport> deserializeFromDirectoryWithDateRange(String directoryPath,
+                                                                   LocalDate startDate,
+                                                                   LocalDate endDate) {
+        var reports = new ArrayList<>(deserializeFromDirectory(directoryPath));
+        return reports.stream()
+                .filter(
+                        rep -> rep.getDate().isAfter(startDate.minusDays(1))
+                                && rep.getDate().isBefore(endDate.plusDays(1))
+                )
+                .collect(Collectors.toList());
     }
 }

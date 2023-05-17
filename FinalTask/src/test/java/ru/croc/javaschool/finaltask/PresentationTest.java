@@ -9,7 +9,7 @@ import ru.croc.javaschool.finaltask.database.repository.impl.InfectionsReportRep
 import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
 import ru.croc.javaschool.finaltask.model.entity.InfectionsReport;
 import ru.croc.javaschool.finaltask.service.DailyReportService;
-import ru.croc.javaschool.finaltask.xml.XmlDeserializer;
+import ru.croc.javaschool.finaltask.xml.ReportDeserializer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,9 +74,9 @@ public class PresentationTest {
     public void present() throws SQLException {
         var actualInfectionReports = new ArrayList<InfectionsReport>();
         var actualHospitalizationReports = new ArrayList<HospitalizationsReport>();
-        XmlDeserializer deserializer = new XmlDeserializer();
+        ReportDeserializer deserializer = new ReportDeserializer();
         // getting daily reports from directory "reports"
-        var dailyReports = deserializer.deserializeFromDirectory(directoryName, LocalDate.of(2023, Month.MAY, 15),
+        var dailyReports = deserializer.deserializeFromDirectoryWithDateRange(directoryName, LocalDate.of(2023, Month.MAY, 15),
                 LocalDate.of(2023, Month.MAY, 21));
 
         // initialization

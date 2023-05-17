@@ -140,7 +140,7 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
     public boolean deleteByDate(LocalDate date) {
         // checking if there is deleting report in the table
         if (!Objects.isNull(findByDate(date))) {
-            System.out.printf("Удаление записи %s из таблицы $s\n", date, TABLE_NAME);
+            System.out.printf("Удаление записи %s из таблицы %s\n", date, TABLE_NAME);
 
             String deleteQuery = String.format("DELETE FROM "
                     + TABLE_NAME
