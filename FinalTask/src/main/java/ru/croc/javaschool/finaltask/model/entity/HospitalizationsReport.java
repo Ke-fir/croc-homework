@@ -1,4 +1,4 @@
-package ru.croc.javaschool.finaltask.model.output;
+package ru.croc.javaschool.finaltask.model.entity;
 
 import java.time.LocalDate;
 
@@ -41,6 +41,7 @@ public class HospitalizationsReport {
     public HospitalizationsReport() {
     }
 
+    // Is override for right work of Assertions.areEqual()
     @Override
     public boolean equals(Object obj) {
         var rep = (HospitalizationsReport)obj;

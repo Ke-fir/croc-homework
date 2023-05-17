@@ -1,6 +1,7 @@
-package ru.croc.javaschool.finaltask.database.repository;
+package ru.croc.javaschool.finaltask.database.repository.impl;
 
-import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.database.repository.ReportRepository;
+import ru.croc.javaschool.finaltask.model.entity.InfectionsReport;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -33,7 +34,7 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                     null,
                     null,
                     TABLE_NAME.toUpperCase(),
-                    null
+                    new String[]{"TABLE"}
             );
             if (resultSet.next()) {
                 System.out.println("Таблица уже существует");
@@ -41,6 +42,7 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                 statement.executeUpdate(
                         "CREATE TABLE "
                                 + TABLE_NAME
+                                + " ("
                                 + "date VARCHAR(10) NOT NULL, "
                                 + "infection_cases_count INT, "
                                 + "recovery_cases_count INT, "
@@ -56,10 +58,10 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
     }
 
     @Override
-    public boolean create(InfectionsReport report) {
+    public InfectionsReport create(InfectionsReport report) {
         // checking if record already exists in table
         if (Objects.isNull(
-                find(report.getDate())
+                findByDate(report.getDate())
         )) {
             System.out.println("Добавление записи в таблицу " + TABLE_NAME);
 
@@ -81,7 +83,6 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                 statement.executeUpdate();
 
                 System.out.printf("Запись в %s добавлена успешно", TABLE_NAME);
-                return true;
             } catch (SQLException ex) {
                 System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
 
@@ -91,12 +92,13 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                     TABLE_NAME,
                     report.getDate()
             );
+            return null;
         }
-        return false;
+        return findByDate(report.getDate());
     }
 
     @Override
-    public InfectionsReport find(LocalDate date) {
+    public InfectionsReport findByDate(LocalDate date) {
         InfectionsReport report = null;
         var selectQuery = String.format(
                 "SELECT * FROM %s WHERE date = '%s'",
@@ -121,10 +123,10 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
     }
 
     @Override
-    public boolean delete(LocalDate date) {
+    public boolean deleteByDate(LocalDate date) {
         // checking if there is deleting report in the table
-        if (!Objects.isNull(find(date))) {
-            System.out.printf("Удаление записи %s из таблицы $s", date, TABLE_NAME);
+        if (!Objects.isNull(findByDate(date))) {
+            System.out.printf("Удаление записи %s из таблицы $s\n", date, TABLE_NAME);
 
             String deleteQuery = String.format("DELETE FROM "
                     + TABLE_NAME
@@ -133,7 +135,7 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
             try (Connection connection = dataSource.getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate(deleteQuery);
-                System.out.printf("Запись %s удалена успешно", date);
+                System.out.printf("Запись %s удалена успешно\n", date);
                 return true;
             } catch (SQLException e) {
                 System.err.printf("При удалении %s из %s произошла ошибка: %s",
@@ -147,6 +149,6 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                     date,
                     TABLE_NAME);
         }
-        return false;
+        return Objects.isNull(findByDate(date));
     }
 }

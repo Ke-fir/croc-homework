@@ -1,10 +1,10 @@
-package ru.croc.javaschool.finaltask.model.input;
+package ru.croc.javaschool.finaltask.model.dto;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
-import ru.croc.javaschool.finaltask.service.objectadapter.LocalDateAdapter;
+import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.entity.InfectionsReport;
+import ru.croc.javaschool.finaltask.modelhelper.objectadapter.LocalDateAdapter;
 
 import java.time.LocalDate;
 
@@ -59,6 +59,7 @@ public class DailyReport {
         return new InfectionsReport(date, infectionCasesCount, recoveryCasesCount);
     }
 
+    // Is override for right work of Assertions.areEqual()
     @Override
     public boolean equals(Object obj) {
         DailyReport rep = (DailyReport) obj;

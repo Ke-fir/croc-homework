@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.finaltask.database.provider.DataSourceProvider;
-import ru.croc.javaschool.finaltask.database.repository.HospitalizationsReportRepository;
-import ru.croc.javaschool.finaltask.database.repository.InfectionsReportRepository;
-import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.database.repository.impl.HospitalizationsReportRepository;
+import ru.croc.javaschool.finaltask.database.repository.impl.InfectionsReportRepository;
+import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.entity.InfectionsReport;
 import ru.croc.javaschool.finaltask.service.DailyReportService;
-import ru.croc.javaschool.finaltask.service.xml.XmlDeserializer;
+import ru.croc.javaschool.finaltask.xml.XmlDeserializer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,16 +92,16 @@ public class PresentationTest {
             var date = dailyReport.getDate();
             // adding report from DB to actual list
             actualInfectionReports.add(
-                    infectionTableRepository.find(date)
+                    infectionTableRepository.findByDate(date)
             );
             // deleting temporary record from DB
-            infectionTableRepository.delete(date);
+            infectionTableRepository.deleteByDate(date);
             // adding report from DB to actual list
             actualHospitalizationReports.add(
-                    hospitalizationTableRepository.find(date)
+                    hospitalizationTableRepository.findByDate(date)
             );
             // deleting temporary record from DB
-            hospitalizationTableRepository.delete(date);
+            hospitalizationTableRepository.deleteByDate(date);
         }
 
         Assertions.assertEquals(expectedHospitalizationReports, actualHospitalizationReports);

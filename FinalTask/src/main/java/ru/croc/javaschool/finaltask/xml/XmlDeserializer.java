@@ -1,8 +1,8 @@
-package ru.croc.javaschool.finaltask.service.xml;
+package ru.croc.javaschool.finaltask.xml;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-import ru.croc.javaschool.finaltask.model.input.DailyReport;
+import ru.croc.javaschool.finaltask.model.dto.DailyReport;
 
 import java.io.File;
 import java.io.StringReader;

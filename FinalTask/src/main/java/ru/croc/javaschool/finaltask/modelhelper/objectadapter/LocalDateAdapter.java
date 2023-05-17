@@ -1,4 +1,4 @@
-package ru.croc.javaschool.finaltask.service.objectadapter;
+package ru.croc.javaschool.finaltask.modelhelper.objectadapter;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 

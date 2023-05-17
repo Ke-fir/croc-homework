@@ -1,6 +1,7 @@
-package ru.croc.javaschool.finaltask.database.repository;
+package ru.croc.javaschool.finaltask.database.repository.impl;
 
-import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.database.repository.ReportRepository;
+import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -30,13 +31,14 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                     null,
                     null,
                     TABLE_NAME.toUpperCase(),
-                    null);
+                    new String[]{"TABLE"});
             if (resultSet.next()) {
                 System.err.println("Таблица уже существует");
             } else {
                 statement.executeUpdate(
                         "CREATE TABLE "
                                 + TABLE_NAME
+                                + " ("
                                 + "date VARCHAR(10) NOT NULL, "
                                 + "hospitalization_cases_count INT, "
                                 + "discharging_cases_count INT, "
@@ -52,10 +54,10 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
     }
 
     @Override
-    public boolean create(HospitalizationsReport report) {
+    public HospitalizationsReport create(HospitalizationsReport report) {
         // checking if record already exists in table
         if (Objects.isNull(
-                find(report.getDate()))) {
+                findByDate(report.getDate()))) {
             System.out.println("Добавление записи в таблицу " + TABLE_NAME);
 
             String insertQuery = "INSERT INTO "
@@ -76,7 +78,6 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                 statement.executeUpdate();
 
                 System.out.printf("Запись в %s добавлена успешно\n", TABLE_NAME);
-                return true;
             } catch (SQLException ex) {
                 System.err.printf("При добавлении записи в %s произошла ошибка: %s", TABLE_NAME, ex.getLocalizedMessage());
             }
@@ -85,8 +86,9 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                     TABLE_NAME,
                     report.getDate()
             );
+            return null;
         }
-        return false;
+        return findByDate(report.getDate());
     }
 
     /**
@@ -96,7 +98,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
      * @return Hospitalization report with suitable date. Or null if none was found.
      */
     @Override
-    public HospitalizationsReport find(LocalDate date) {
+    public HospitalizationsReport findByDate(LocalDate date) {
         HospitalizationsReport report = null;
         var selectQuery = String.format(
                 "SELECT * FROM %s WHERE date = '%s'",
@@ -114,17 +116,29 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                 );
             }
         } catch (SQLException e) {
-            System.err.printf("Возникла ошибка выполнения запроса (поиск) в таблице %s: %s ", TABLE_NAME,
+            System.err.printf("Возникла ошибка выполнения запроса (поиск) в таблице %s: %s\n", TABLE_NAME,
                     e.getLocalizedMessage());
         }
 
         return report;
     }
 
+    /*@Override
+    public List<HospitalizationsReport> findByDateRange(LocalDate startDate, LocalDate endDate) {
+        var reportList = new ArrayList<HospitalizationsReport>();
+        for (var date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
+            var report = findByDate(date);
+            if (report != null) {
+                reportList.add(report);
+            }
+        }
+        return reportList;
+    }*/
+
     @Override
-    public boolean delete(LocalDate date) {
+    public boolean deleteByDate(LocalDate date) {
         // checking if there is deleting report in the table
-        if (!Objects.isNull(find(date))) {
+        if (!Objects.isNull(findByDate(date))) {
             System.out.printf("Удаление записи %s из таблицы %s\n", date, TABLE_NAME);
 
             String deleteQuery = String.format("DELETE FROM "
@@ -134,8 +148,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
             try (Connection connection = dataSource.getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate(deleteQuery);
-                System.out.printf("Запись %s удалена успешно", date);
-                return true;
+                System.out.printf("Запись %s удалена успешно\n", date);
             } catch (SQLException e) {
                 System.err.printf("При удалении %s из %s произошла ошибка: %s",
                         date,
@@ -148,6 +161,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
                     date,
                     TABLE_NAME);
         }
-        return false;
+        // checks if there is any record with suitable date after deleting
+        return Objects.isNull(findByDate(date));
     }
 }

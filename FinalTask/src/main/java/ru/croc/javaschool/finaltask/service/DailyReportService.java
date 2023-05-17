@@ -1,10 +1,11 @@
 package ru.croc.javaschool.finaltask.service;
 
-import ru.croc.javaschool.finaltask.database.repository.HospitalizationsReportRepository;
-import ru.croc.javaschool.finaltask.database.repository.InfectionsReportRepository;
-import ru.croc.javaschool.finaltask.model.input.DailyReport;
+import ru.croc.javaschool.finaltask.database.repository.impl.HospitalizationsReportRepository;
+import ru.croc.javaschool.finaltask.database.repository.impl.InfectionsReportRepository;
+import ru.croc.javaschool.finaltask.model.dto.DailyReport;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The class responsible for daily report service.
@@ -31,13 +32,14 @@ public class DailyReportService {
         var infectionReport = report.toInfectionsReport();
 
         System.out.println("Запись отчёта о госпитализации в таблицу " + hospitalRepository.TABLE_NAME);
-        if (hospitalRepository.create(hospitalReport)) {
+        if (!Objects.isNull(hospitalRepository.create(hospitalReport))) {
             System.out.println("Запись отчёта о заболеваниях в таблицу " + infectionRepository.TABLE_NAME);
-            if (infectionRepository.create(infectionReport)) {
+            if (!Objects.isNull(infectionRepository.create(infectionReport))) {
                 System.out.println("Записи проведены успешно");
                 return true;
             }
         }
+        System.err.println("Произошла ошиба при записи ежедневного отчета в базу данных");
         return false;
     }
 

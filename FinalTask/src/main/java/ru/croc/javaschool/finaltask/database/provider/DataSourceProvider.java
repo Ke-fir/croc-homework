@@ -21,6 +21,8 @@ public class DataSourceProvider {
         if (Objects.isNull(dataSource)) {
             dataSource = new EmbeddedDataSource();
             dataSource.setDatabaseName("covidStatistics");
+            dataSource.setUser("Root");
+            dataSource.setUser("tooR");
             dataSource.setCreateDatabase("create");
         }
         return dataSource;

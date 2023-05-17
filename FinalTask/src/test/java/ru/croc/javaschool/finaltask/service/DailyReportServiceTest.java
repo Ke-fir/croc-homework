@@ -3,11 +3,11 @@ package ru.croc.javaschool.finaltask.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.finaltask.database.provider.DataSourceProvider;
-import ru.croc.javaschool.finaltask.database.repository.HospitalizationsReportRepository;
-import ru.croc.javaschool.finaltask.database.repository.InfectionsReportRepository;
-import ru.croc.javaschool.finaltask.model.input.DailyReport;
-import ru.croc.javaschool.finaltask.model.output.HospitalizationsReport;
-import ru.croc.javaschool.finaltask.model.output.InfectionsReport;
+import ru.croc.javaschool.finaltask.database.repository.impl.HospitalizationsReportRepository;
+import ru.croc.javaschool.finaltask.database.repository.impl.InfectionsReportRepository;
+import ru.croc.javaschool.finaltask.model.dto.DailyReport;
+import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
+import ru.croc.javaschool.finaltask.model.entity.InfectionsReport;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -51,10 +51,10 @@ public class DailyReportServiceTest {
          );
 
          ds.createNewReport(report);
-         var actualHospitalizationReport = hRepository.find(report.getDate());
-        hRepository.delete(report.getDate());
-         var actualInfectionReport = iRepository.find(report.getDate());
-         iRepository.delete(report.getDate());
+         var actualHospitalizationReport = hRepository.findByDate(report.getDate());
+        hRepository.deleteByDate(report.getDate());
+         var actualInfectionReport = iRepository.findByDate(report.getDate());
+         iRepository.deleteByDate(report.getDate());
         Assertions.assertEquals(expectedHospitalizationReport, actualHospitalizationReport);
         Assertions.assertEquals(expectedInfectionReport, actualInfectionReport);
      }
@@ -85,10 +85,10 @@ public class DailyReportServiceTest {
          var repList = new ArrayList<DailyReport>(Arrays.asList(report1, report2, report3));
          ds.createAllReports(repList);
          for (var rep : repList) {
-             Assertions.assertNotNull(iRepository.find(rep.getDate()));
-             iRepository.delete(rep.getDate());
-             Assertions.assertNotNull(hRepository.find(rep.getDate()));
-             hRepository.delete(rep.getDate());
+             Assertions.assertNotNull(iRepository.findByDate(rep.getDate()));
+             iRepository.deleteByDate(rep.getDate());
+             Assertions.assertNotNull(hRepository.findByDate(rep.getDate()));
+             hRepository.deleteByDate(rep.getDate());
          }
      }
 }

@@ -17,9 +17,9 @@ public interface ReportRepository<T> {
     /**
      * Creates record in table.
      *
-     * @return True if work was done. False if sth went wrong.
+     * @return Report if it was created successfully. Null if sth went wrong.
      */
-    boolean create(T report);
+    T create(T report);
 
     /**
      * Finds record in table due to date value.
@@ -27,7 +27,16 @@ public interface ReportRepository<T> {
      * @param date Date of report.
      * @return Report.
      */
-    T find(LocalDate date);
+    T findByDate(LocalDate date);
+
+    /**
+     * Finds list of records that was done in some date range.
+     *
+     * @param startDate Start date of range
+     * @param endDate End date of range
+     * @return List of records.
+     */
+    //List<T> findByDateRange(LocalDate startDate, LocalDate endDate);
 
     /**
      * Deletes report with suitable date from table.
@@ -35,5 +44,5 @@ public interface ReportRepository<T> {
      * @param date Date of report.
      * @return True if work was done. False if sth went wrong.
      */
-    boolean delete(LocalDate date);
+    boolean deleteByDate(LocalDate date);
 }

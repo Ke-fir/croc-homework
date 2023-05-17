@@ -1,4 +1,4 @@
-package ru.croc.javaschool.finaltask.model.output;
+package ru.croc.javaschool.finaltask.model.entity;
 
 import java.time.LocalDate;
 
@@ -8,8 +8,19 @@ import java.time.LocalDate;
  */
 public class InfectionsReport {
 
+    /**
+     * The date of report.
+     */
     private LocalDate date;
+
+    /**
+     * The number of new infection cases.
+     */
     private int infectionCasesCount;
+
+    /**
+     * The number of new recovery cases.
+     */
     private int recoveryCasesCount;
 
     /**
@@ -32,9 +43,10 @@ public class InfectionsReport {
     public InfectionsReport() {
     }
 
+    /* Is override for right work of Assertions.areEqual() */
     @Override
     public boolean equals(Object obj) {
-        var rep = (InfectionsReport)obj;
+        var rep = (InfectionsReport) obj;
         return this.date.equals(rep.date) &&
                 this.infectionCasesCount == rep.infectionCasesCount &&
                 this.recoveryCasesCount == rep.recoveryCasesCount;

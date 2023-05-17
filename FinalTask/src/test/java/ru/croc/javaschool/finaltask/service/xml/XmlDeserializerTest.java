@@ -2,7 +2,8 @@ package ru.croc.javaschool.finaltask.service.xml;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.croc.javaschool.finaltask.model.input.DailyReport;
+import ru.croc.javaschool.finaltask.model.dto.DailyReport;
+import ru.croc.javaschool.finaltask.xml.XmlDeserializer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
