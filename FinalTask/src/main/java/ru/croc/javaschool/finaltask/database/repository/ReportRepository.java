@@ -2,6 +2,7 @@ package ru.croc.javaschool.finaltask.database.repository;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Interface of database repository for reports.
@@ -36,7 +37,7 @@ public interface ReportRepository<T> {
      * @param endDate End date of range
      * @return List of records.
      */
-    //List<T> findByDateRange(LocalDate startDate, LocalDate endDate);
+    List<T> findByDateRange(LocalDate startDate, LocalDate endDate);
 
     /**
      * Deletes report with suitable date from table.

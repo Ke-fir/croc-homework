@@ -6,6 +6,8 @@ import ru.croc.javaschool.finaltask.model.entity.HospitalizationsReport;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -123,7 +125,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
         return report;
     }
 
-    /*@Override
+    @Override
     public List<HospitalizationsReport> findByDateRange(LocalDate startDate, LocalDate endDate) {
         var reportList = new ArrayList<HospitalizationsReport>();
         for (var date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
@@ -133,7 +135,7 @@ public class HospitalizationsReportRepository implements ReportRepository<Hospit
             }
         }
         return reportList;
-    }*/
+    }
 
     @Override
     public boolean deleteByDate(LocalDate date) {

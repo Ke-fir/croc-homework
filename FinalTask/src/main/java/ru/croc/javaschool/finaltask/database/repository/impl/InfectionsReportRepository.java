@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -120,6 +122,18 @@ public class InfectionsReportRepository implements ReportRepository<InfectionsRe
                     e.getLocalizedMessage());
         }
         return report;
+    }
+
+    @Override
+    public List<InfectionsReport> findByDateRange(LocalDate startDate, LocalDate endDate) {
+        var reportList = new ArrayList<InfectionsReport>();
+        for (var date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
+            var report = findByDate(date);
+            if (report != null) {
+                reportList.add(report);
+            }
+        }
+        return reportList;
     }
 
     @Override
